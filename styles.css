@@ -2101,6 +2101,33 @@ input:focus-visible {
   }
 }
 
+/* Career — 연도별 경력과 공백 기간 */
+.career-page.about-detail-page .detail-item {
+  grid-template-columns: 132px minmax(0, 1fr);
+}
+.career-page.about-detail-page .detail-label {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.career-page.about-detail-page .career-gap {
+  padding-block: 24px;
+}
+.career-page.about-detail-page .career-gap h2 {
+  color: var(--muted);
+  font-weight: 400;
+}
+@container (max-width: 700px) {
+  .career-page.about-detail-page .detail-item {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+  .career-page.about-detail-page .detail-label {
+    font-size: 9px;
+  }
+  .career-page.about-detail-page .career-gap {
+    padding-block: 18px;
+  }
+}
+
 /* 33. 문서형 공통 — About 하위 / 개별 프로젝트
  * .document-page가 작은 제목·사이드 메뉴·본문 틀을 공유합니다. */
 .document-layout {
