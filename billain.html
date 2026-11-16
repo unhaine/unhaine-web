@@ -71,79 +71,197 @@
               Billain
               <span class="period">.</span>
             </h1>
-            <p>
-              반복적인 통신료 청구 작업을 데이터 수집, 검증, 발송이 연결된 웹
-              기반 시스템으로 전환한 프로젝트.
-            </p>
-            <div class="tags">
-              <span>Workflow Design</span>
-              <span>Automation</span>
-              <span>Web Application</span>
+            <p class="case-subtitle">통신료 청구 업무 자동화 시스템</p>
+            <div class="case-summary">
+              <p>
+                매월 반복되는 통신료 청구 업무를 자동화하기 위해 기획하고 개발한
+                웹 애플리케이션입니다. 기존 업무 프로세스를 분석하고 AI 기반
+                바이브코딩을 활용해 시스템을 구축했으며, 실제 업무에 적용해
+                운영하고 있습니다.
+              </p>
             </div>
+            <dl class="case-facts">
+              <div>
+                <dt>담당 역할</dt>
+                <dd>기획 · 시스템 설계 · AI 활용 개발 · 운영</dd>
+              </div>
+              <div>
+                <dt>프로젝트 성과</dt>
+                <dd>업무 처리 시간 3일 이상 → 3~4시간</dd>
+              </div>
+            </dl>
           </header>
-          <div class="project-visual billain-visual detail-visual">
-            <div class="fake-window">
-              <div class="window-top">
-                <i></i>
-                <i></i>
-                <i></i>
-                <span>Billain / Process</span>
+          <figure
+            class="project-gallery"
+            data-gallery
+            aria-label="Billain 화면 미리보기"
+          >
+            <button
+              class="gallery-open"
+              type="button"
+              aria-label="현재 화면 확대 보기"
+            >
+              <img
+                class="gallery-image"
+                src="assets/billain/01-clients.jpg"
+                width="1440"
+                height="900"
+                alt="가상 데이터로 구성한 Billain 고객사 관리 화면"
+                decoding="async"
+              />
+            </button>
+            <figcaption>
+              <div class="gallery-details" aria-live="polite">
+                <div class="gallery-caption">
+                  <span class="gallery-title">고객사 관리</span>
+                  <span class="gallery-count">1 / 5</span>
+                </div>
+                <p class="gallery-description">
+                  등록된 고객사를 한눈에 살펴보고, 검색을 통해 작업할 고객사를
+                  찾습니다.
+                </p>
               </div>
-              <div class="mock-row mock-primary"></div>
-              <div class="mock-row"></div>
-              <div class="mock-row short"></div>
-              <div class="mock-metrics">
-                <b>UPLOAD</b>
-                <b>VALIDATE</b>
-                <b>SEND</b>
+              <p class="gallery-note">
+                공개용 가상 데이터로 재구성한 화면입니다. 청구서 출력 예시는
+                별도 샘플 서식입니다.
+              </p>
+            </figcaption>
+            <div class="gallery-controls">
+              <button class="gallery-prev" type="button" aria-label="이전 화면">
+                ←
+              </button>
+              <div class="gallery-dots" aria-label="화면 선택">
+                <button
+                  type="button"
+                  aria-label="고객사 관리 보기"
+                  aria-pressed="true"
+                  data-src="assets/billain/01-clients.jpg"
+                  data-title="고객사 관리"
+                  data-description="등록된 고객사를 한눈에 살펴보고, 검색을 통해 작업할 고객사를 찾습니다."
+                ></button>
+                <button
+                  type="button"
+                  aria-label="고객사 상세 보기"
+                  aria-pressed="false"
+                  data-src="assets/billain/06-client-detail.jpg"
+                  data-title="고객사 상세"
+                  data-description="선택한 고객사의 기본 정보와 청구 담당자, 결제 방식, 청구 계정을 관리합니다."
+                ></button>
+                <button
+                  type="button"
+                  aria-label="회선 리스트 보기"
+                  aria-pressed="false"
+                  data-src="assets/billain/02-lines.jpg"
+                  data-title="회선 리스트"
+                  data-description="통신사 회선 정보를 관리합니다. 등록한 회선 정보는 통신사 청구 데이터를 연결하는 기준이 됩니다."
+                ></button>
+                <button
+                  type="button"
+                  aria-label="통신료 취합 보기"
+                  aria-pressed="false"
+                  data-src="assets/billain/03-sources.jpg"
+                  data-title="통신료 취합"
+                  data-description="통신사별 청구 자료를 업로드하고, 회선 정보를 기준으로 요금을 취합합니다. 고객사별 매칭 결과를 확인하고 누락된 내역을 검증합니다."
+                ></button>
+                <button
+                  type="button"
+                  aria-label="청구서 출력 보기"
+                  aria-pressed="false"
+                  data-src="assets/billain/05-invoice-sample.jpg"
+                  data-title="청구서 출력"
+                  data-description="확정한 청구 내역을 PDF로 생성하고 이메일로 발송합니다. 고객에게 전달할 이용 내역과 최종 청구 금액을 문서로 정리합니다."
+                ></button>
               </div>
+              <button class="gallery-next" type="button" aria-label="다음 화면">
+                →
+              </button>
             </div>
-          </div>
+            <dialog class="gallery-dialog" aria-label="Billain 화면 확대 보기">
+              <div class="gallery-dialog-header">
+                <p class="gallery-dialog-caption"></p>
+                <button
+                  class="gallery-close"
+                  type="button"
+                  aria-label="확대 보기 닫기"
+                >
+                  닫기 ×
+                </button>
+              </div>
+              <img width="1440" height="900" alt="" />
+            </dialog>
+          </figure>
           <section class="case-sections" aria-label="프로젝트 상세">
             <article class="case-article">
-              <span class="detail-label">01 / THE PROBLEM</span>
+              <span class="detail-label">01 / PROBLEM</span>
               <div>
-                <h2>Manual steps created friction.</h2>
+                <h2>반복적인 수작업과 분산된 업무 프로세스</h2>
                 <p>
-                  여러 곳에서 내려받은 청구 데이터를 취합하고 계정별로
-                  가공·검증한 뒤 PDF와 메일로 전달하는 과정에서 반복적인
-                  수작업이 발생했습니다.
+                  통신사별로 제공되는 청구 데이터를 취합하고, 고객사별 청구
+                  기준에 맞춰 가공·검증한 뒤 청구서를 발행해야 했습니다.
+                </p>
+                <p>
+                  데이터 취합부터 PDF 생성, 이메일 발송까지 여러 도구와 수작업에
+                  의존하면서 매월 3일 이상의 업무 시간이 소요되었습니다.
                 </p>
               </div>
             </article>
             <article class="case-article">
-              <span class="detail-label">02 / MY ROLE</span>
+              <span class="detail-label">02 / SOLUTION</span>
               <div>
-                <h2>From workflow to interface.</h2>
+                <h2>분산된 업무를 하나의 시스템으로</h2>
                 <p>
-                  업무 규칙, 데이터 구조, 사용자 인터페이스와 실제 운영 흐름을
-                  설계하고 웹 프론트엔드 구현을 주도했습니다. 백엔드 개발은
-                  협업으로 진행했습니다.
+                  자료 업로드부터 데이터 취합, 검증, 청구서 발행 및 이메일
+                  발송까지의 과정을 하나의 웹 시스템으로 통합했습니다.
                 </p>
+                <ul class="case-work">
+                  <li>
+                    <strong>업무 프로세스</strong>
+                    기존 청구 절차를 분석하고 통합된 업무 흐름 설계
+                  </li>
+                  <li>
+                    <strong>데이터 관리</strong>
+                    고객사·회선·청구 정보의 데이터 구조 및 매칭 규칙 설계
+                  </li>
+                  <li>
+                    <strong>UI/UX</strong>
+                    취합 결과와 청구 내역을 확인하고 검증할 수 있는 화면 구현
+                  </li>
+                  <li>
+                    <strong>AI 활용 개발</strong>
+                    바이브코딩을 활용한 웹 시스템 구축
+                  </li>
+                </ul>
               </div>
             </article>
             <article class="case-article">
-              <span class="detail-label">03 / THE SOLUTION</span>
+              <span class="detail-label">03 / IMPACT</span>
               <div>
-                <h2>One connected workflow.</h2>
-                <p>
-                  파일 업로드 → 취합 결과 확인 → 검증 → 발송으로 이어지는 일관된
-                  프로세스를 구성했습니다.
-                </p>
-              </div>
-            </article>
-            <article class="case-article">
-              <span class="detail-label">04 / OUTCOME</span>
-              <div>
-                <h2>Days to hours.</h2>
-                <p>
-                  기존 약 3일 이상 걸리던 업무를 VBA 단계에서 1~2일로 줄였고, 웹
-                  시스템 도입 후 약 3~4시간 수준으로 단축했습니다.
-                </p>
-                <p class="note">
-                  수치는 당시 실제 운영 경험을 바탕으로 한 비교이며, 표준화된
-                  실험 측정치는 아닙니다.
-                </p>
+                <h2>업무 처리 시간 약 90% 단축</h2>
+                <table
+                  class="case-comparison"
+                  aria-label="Billain 도입 전후 비교"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Before</th>
+                      <th scope="col">After</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>3일 이상</td>
+                      <td>3~4시간</td>
+                    </tr>
+                    <tr>
+                      <td>수작업 중심의 데이터 취합</td>
+                      <td>시스템 기반 데이터 처리</td>
+                    </tr>
+                    <tr>
+                      <td>여러 도구를 활용한 청구 업무</td>
+                      <td>통합된 청구 및 발송 프로세스</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </article>
           </section>

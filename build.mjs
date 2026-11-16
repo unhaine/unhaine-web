@@ -42,6 +42,12 @@ for (const source of ['background.js', 'script.js']) {
   const result = await transform(await readFile(source, 'utf8'), { loader: 'js', minify: true, charset: 'utf8' });
   await emitAsset(source, result.code);
 }
+for (const file of await readdir('assets/billain')) {
+  if (!file.endsWith('.jpg')) continue;
+  const source = `assets/billain/${file}`;
+  await emitAsset(source, await readFile(source));
+}
+await emitAsset('assets/kata/kata-mark-v2.png', await readFile('assets/kata/kata-mark-v2.png'));
 for (const file of await readdir('.')) {
   if (!file.endsWith('.html')) continue;
   let html = await readFile(file, 'utf8');
@@ -50,5 +56,6 @@ for (const file of await readdir('.')) {
   await writeFile(join(output, file), html);
 }
 await copyFile('assets/fonts/IBM-Plex-LICENSE.txt', join(output, 'assets/IBM-Plex-LICENSE.txt'));
+await copyFile('assets/icons/Lucide-LICENSE.txt', join(output, 'assets/Lucide-LICENSE.txt'));
 await writeFile(join(output, '_headers'), '/*\n  Cache-Control: public, max-age=60\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n');
 console.log('Built static website in dist/');
