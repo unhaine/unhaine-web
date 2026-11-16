@@ -3028,15 +3028,10 @@ input:focus-visible {
   color: var(--accent);
 }
 
-/* 36. Blog 글 목록 / 개별 글 — 임시 글과 문서형 읽기 레이아웃 */
-.sample-label {
-  color: var(--accent);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-}
+/* 36. Blog 글 목록 / 개별 글 — 날짜와 문서형 읽기 레이아웃 */
 .blog-post-row {
   display: grid;
-  grid-template-columns: 80px minmax(0, 1fr) 28px;
+  grid-template-columns: 88px minmax(0, 1fr) 28px;
   align-items: start;
   gap: 20px;
   padding: 24px 0;
@@ -3055,8 +3050,10 @@ input:focus-visible {
   font-size: 13px;
   margin: 0;
 }
-.blog-post-row .sample-label {
+.blog-post-row .post-date {
   padding-top: 7px;
+  font-size: 11px;
+  color: var(--muted);
 }
 .blog-post-row .arrow {
   font-size: 24px;
@@ -3096,20 +3093,46 @@ input:focus-visible {
 .article-body h2 {
   font-size: 21px;
   line-height: 1.5;
-  margin: 0 0 16px;
+  margin: 40px 0 16px;
   letter-spacing: -0.04em;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+.article-body > h2:first-child {
+  margin-top: 0;
 }
 .article-body p {
   font-size: inherit;
   line-height: inherit;
   margin: 0 0 16px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
-.article-body .article-disclaimer {
+.article-body strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: var(--detail-body-size);
+}
+.article-body th,
+.article-body td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.article-body th {
+  color: var(--muted);
   font-size: var(--detail-meta-size);
-  color: #7e94a7;
-  border-block: 1px solid var(--line);
-  padding: 16px 0;
-  margin-bottom: 28px;
+  font-weight: 500;
+}
+.article-body tbody tr:last-child {
+  background: rgb(25 215 199 / 5%);
+  color: var(--accent);
 }
 .article-body blockquote {
   margin: 24px 0;
@@ -3145,7 +3168,7 @@ input:focus-visible {
     gap: 10px;
     padding-block: 20px;
   }
-  .blog-post-row .sample-label {
+  .blog-post-row .post-date {
     grid-column: 1 / -1;
     padding: 0;
   }
@@ -3173,6 +3196,12 @@ input:focus-visible {
 /* 37. 블로그 상세 사이드바 — 연도별 글 아카이브 */
 .blog-archive {
   font-size: 12px;
+}
+.blog-article-page .detail-sidebar {
+  align-self: stretch;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
 }
 .archive-year summary {
   cursor: pointer;
@@ -3212,6 +3241,9 @@ input:focus-visible {
   color: var(--accent);
 }
 @container (max-width: 700px) {
+  .blog-article-page .detail-sidebar {
+    max-height: 144px;
+  }
   .archive-year summary {
     padding: 6px 2px;
   }

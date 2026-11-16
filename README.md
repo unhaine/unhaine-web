@@ -1,6 +1,6 @@
 # Unhaine static prototype
 
-`index.html`을 브라우저에서 열면 시작합니다. 별도 서버나 빌드가 필요 없습니다.
+`index.html`을 브라우저에서 열면 시작합니다. 블로그 원고를 수정한 후에는 Node.js 20 이상에서 `npm ci` (최초 한 번), `npm run build`를 실행합니다. 블로그 목록과 상세 HTML을 현재 경로에 자동 생성하므로 기존처럼 파일을 직접 열어 확인할 수 있습니다. 압축된 전체 사이트는 `dist/index.html`에서도 확인할 수 있습니다.
 
 ## 페이지
 - Main: `index.html`
@@ -11,13 +11,24 @@
 - Portfolio: `portfolio.html`
   - Billain: `billain.html`
   - kata: `kata.html`
-- Blog: `blog.html`
-  - 임시 글 상세: `blog-small-experiments.html`
+- Blog: `blog.html` (자동 생성)
+  - Billain 개발 이야기: `blog-billain.html` (자동 생성)
+  - 영업에서 AI로 이어진 이야기: `blog-ai-journey.html` (자동 생성)
 - Contact: `contact.html`
 
 모든 페이지에서 Ask Unhaine 버튼이 작동합니다. 현재 키워드 기반 데모 응답만 제공하고 실제 AI API를 호출하지 않습니다. 개인정보와 외부 URL은 임의로 생성하지 않았습니다.
 
 스타일: `styles.css` / 동작: `script.js`
+
+## 블로그 글 추가
+
+1. `content/blog/이름.md`에 본문을 Markdown으로 작성합니다. 제목과 소개 문장은 다음 단계에 등록하므로 본문은 `##` 소제목부터 시작합니다.
+2. `content/blog/posts.json`에 `slug`, `title`, `summary`, `date` (`YYYY-MM-DD`), `category`를 추가합니다. `slug`는 Markdown 파일명과 같아야 하며 영문 소문자·숫자·하이픈을 사용합니다.
+3. `npm run build`를 실행합니다. 현재 경로의 `blog-이름.html`과 `blog.html`, 연도별 아카이브가 자동 생성됩니다. 배포용 압축본도 `dist/`에 생성됩니다. 생성된 HTML을 직접 편집하지 않습니다.
+
+예를 들어 `slug`가 `billain`이면 원고는 `content/blog/billain.md`, 로컬 파일은 `blog-billain.html`, 운영 주소는 `/blog-billain`입니다. 글을 삭제하려면 목록과 원고를 제거한 뒤 다시 빌드합니다. 해당 글의 자동 생성 HTML도 정리됩니다.
+
+공통 디자인은 `templates/blog-index.html`, `templates/blog-article.html`과 `styles.css`에서 관리합니다. Markdown은 저장소 작성자가 관리하는 콘텐츠이며 방문자 입력을 렌더링하는 기능은 없습니다. 글 추가만으로 운영 사이트에 반영되지는 않으며 GitHub 업로드와 배포는 별도로 진행합니다.
 
 ## 배포
 

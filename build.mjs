@@ -1,10 +1,11 @@
-import { readFile, writeFile, readdir, mkdir, rm, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir, rm, unlink, copyFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve, join } from 'node:path';
 import { transform } from 'esbuild';
 import { minify } from 'html-minifier-terser';
+import { renderBlog } from './blog.mjs';
 
-// Only generated output is cleared. Sources remain directly previewable.
+// Only generated output is cleared. Blog pages are generated from Markdown.
 const output = resolve('dist');
 if (output !== join(process.cwd(), 'dist')) throw new Error('Unexpected output path');
 await rm(output, { recursive: true, force: true });
@@ -48,9 +49,26 @@ for (const file of await readdir('assets/billain')) {
   await emitAsset(source, await readFile(source));
 }
 await emitAsset('assets/kata/kata-mark-v2.png', await readFile('assets/kata/kata-mark-v2.png'));
+const blogPages = await renderBlog();
+const pages = new Map(blogPages);
+const generatedBlogMarker = '<!-- Generated blog page: edit content/blog and templates, then run npm run build. -->';
 for (const file of await readdir('.')) {
   if (!file.endsWith('.html')) continue;
-  let html = await readFile(file, 'utf8');
+  if (pages.has(file)) continue;
+  const source = await readFile(file, 'utf8');
+  if (source.startsWith(generatedBlogMarker)) {
+    // Remove only obsolete generated blog previews, never authored pages.
+    if (/^blog-[a-z0-9-]+\.html$/.test(file)) await unlink(file);
+    continue;
+  }
+  pages.set(file, source);
+}
+// Keep local, directly openable HTML previews alongside the existing pages.
+for (const [file, html] of blogPages) {
+  await writeFile(file, `${generatedBlogMarker}\n${html}`);
+}
+for (const [file, sourceHtml] of pages) {
+  let html = sourceHtml;
   for (const [source, target] of replacements) html = html.replaceAll(`"${source}"`, `"${target}"`);
   html = await minify(html, { collapseWhitespace: true, removeComments: true, removeRedundantAttributes: true });
   await writeFile(join(output, file), html);
