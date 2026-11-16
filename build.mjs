@@ -50,5 +50,5 @@ for (const file of await readdir('.')) {
   await writeFile(join(output, file), html);
 }
 await copyFile('assets/fonts/IBM-Plex-LICENSE.txt', join(output, 'assets/IBM-Plex-LICENSE.txt'));
-await writeFile(join(output, '_headers'), '/*\n  Cache-Control: public, max-age=60\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n');
+await writeFile(join(output, '_headers'), '/*\n  Cache-Control: public, max-age=60\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n');
 console.log('Built static website in dist/');
