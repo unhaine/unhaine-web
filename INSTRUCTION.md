@@ -21,7 +21,6 @@ unhaine
 ├── About                /about            자기소개 및 하위 영역으로 이동
 │   ├── Career           /about/career     경력 · 역할 · 주요 이력
 │   ├── Education        /about/education  학력 · 교육 · 학습 이력
-│   ├── Capabilities     /about/capabilities 역량 · 경험 · 기술
 │   └── Values           /about/values     일하는 방식 · 판단 기준
 ├── Portfolio            /portfolio        세로 스크롤형 프로젝트 카탈로그
 │   ├── Billain          /portfolio/billain 청구 업무 자동화 사례
@@ -38,7 +37,6 @@ About
 '어떤 사람인가'에 집중한다.
 - Career: 경력과 맡은 역할, 직무 변화의 흐름
 - Education: 학력, AI 관련 교육과 학습 과정
-- Capabilities: 사업개발, 문제 정의, 프로세스 설계, 소프트웨어 구현 등 검증 가능한 역량
 - Values: 목표 지향성, 책임감, 협업, 근거에 따른 판단 수정 등 실제 행동에 기반한 업무 가치관
 
 Portfolio
@@ -119,7 +117,7 @@ Phase 4 — 운영 및 고도화
 7. 현재 확정 사항과 미결정 사항
 확정된 기획
 - 최상위 메뉴: Main / About / Portfolio / Contact
-- About 하위 영역: Career / Education / Capabilities / Values
+- About 하위 영역: Career / Education / Values
 - Portfolio 초기 대상: Billain, kata
 - Portfolio 표현: 세로형 카탈로그 및 별도 상세 페이지
 - Ask Unhaine: 모든 페이지를 포괄하는 공통 인터페이스

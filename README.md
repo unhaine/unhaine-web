@@ -7,11 +7,10 @@
 - About: `about.html`
   - Career: `career.html`
   - Education: `education.html`
-  - Capabilities: `capabilities.html`
   - Values: `values.html`
 - Portfolio: `portfolio.html`
   - Billain: `billain.html`
-  - KATA/KIRI: `kata.html`
+  - kata: `kata.html`
 - Blog: `blog.html`
   - 임시 글 상세: `blog-small-experiments.html`
 - Contact: `contact.html`
@@ -22,6 +21,8 @@
 
 ## 배포
 
-`npm ci` 후 `npm run build`를 실행하면 `dist/`에 HTML·CSS·JS 압축본과 실제 참조하는 폰트만 생성합니다. Cloudflare Workers Builds의 빌드 명령은 `npm run build`, 배포 명령은 `npx wrangler deploy --assets ./dist --name unhaine-web --compatibility-date 2026-11-16`입니다. 서버 실행 코드 없이 정적 파일을 제공합니다.
+`npm ci` 후 `npm run build`를 실행하면 `dist/`에 HTML·CSS·JS 압축본과 폰트·프로젝트 이미지를 생성합니다. Cloudflare Workers Builds의 빌드 명령은 `npm run build`, 배포 명령은 `npx wrangler deploy --assets ./dist --name unhaine-web --compatibility-date 2026-11-16`입니다. 서버 실행 코드 없이 정적 파일을 제공합니다.
 
 폰트의 compact 디렉터리는 현재 페이지와 챗 데모에서 사용하는 문자를 모은 IBM Plex Sans KR 서브셋입니다. CSS의 unicode-range로 먼저 사용하며, 그 밖의 문자는 원본 폰트가 처리합니다. 새 문구도 표시됩니다. 파일명에 콘텐츠 해시를 붙여 리소스는 1년 캐시하고, HTML은 60초 캐시합니다.
+
+Billain의 공개용 화면은 가상 데이터로 재구성한 이미지이며, 청구서 출력 예시는 별도 샘플 서식입니다. 실제 고객 데이터나 캡처용 HTML은 배포에 포함하지 않습니다.
