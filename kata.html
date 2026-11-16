@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Unhaine — 비즈니스, 소프트웨어, AI 엔지니어링 포트폴리오"
+    />
+    <title>KATA / KIRI | Unhaine</title>
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSansKR-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="kata-page project-detail-page document-page overview-page chat-enabled"
+  >
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        unhaine
+        <span class="star">.</span>
+      </a>
+      <nav id="main-nav" class="desktop-nav">
+        <a href="index.html" class="">Main</a>
+        <a href="about.html" class="">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="blog.html" class="">Blog</a>
+        <a href="contact.html" class="">Contact</a>
+      </nav>
+      <button id="menu-toggle" class="mobile-toggle" aria-label="메뉴 열기">
+        ☰
+      </button>
+    </header>
+    <main class="site-main">
+      <div class="document-layout">
+        <aside class="detail-sidebar">
+          <a class="detail-parent" href="portfolio.html">← Portfolio</a>
+          <nav class="detail-nav" aria-label="프로젝트 메뉴">
+            <a href="billain.html">
+              <span>01</span>
+              Billain
+            </a>
+            <a href="kata.html" class="active" aria-current="page">
+              <span>02</span>
+              kata
+            </a>
+          </nav>
+        </aside>
+        <div class="detail-content">
+          <header class="detail-heading">
+            <h1>
+              kata
+              <span class="period">.</span>
+            </h1>
+            <p>
+              에이전트가 어떻게 계획하고 실행하며 검증되는지, 그 과정을 어떻게
+              관찰할 수 있을지 탐구합니다.
+            </p>
+            <div class="tags">
+              <span>Agent Harness</span>
+              <span>Orchestration</span>
+              <span>Guardrails</span>
+              <span>Visualization</span>
+            </div>
+          </header>
+          <div class="project-visual kata-visual detail-visual">
+            <div class="node-graph">
+              <span class="node">INPUT</span>
+              <span class="node accent">ORCHESTRATOR</span>
+              <span class="node">AGENT</span>
+              <span class="node">VERIFY</span>
+              <span class="node">OUTPUT</span>
+            </div>
+          </div>
+          <section class="case-sections" aria-label="프로젝트 상세">
+            <article class="case-article">
+              <span class="detail-label">01 / IDEA</span>
+              <div>
+                <h2>A system for working with agents.</h2>
+                <p>
+                  KATA는 에이전트의 실행 방식과 오케스트레이션을 다루는 하네스
+                  프로젝트입니다. KIRI는 실행 과정과 상태를 시각적으로 표현하는
+                  프론트엔드 구상입니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">02 / DESIGN PRINCIPLES</span>
+              <div>
+                <h2>Explicit flows. Observable decisions.</h2>
+                <p>
+                  메인 플로우와 하위 분기, 작업 에이전트와 검증 에이전트의 역할
+                  구분, 문서 중심의 상태 및 변경 전파를 검토하고 있습니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">03 / QUESTIONS</span>
+              <div>
+                <h2>What makes agent work reliable?</h2>
+                <p>
+                  긴 작업이 불필요하게 확장되는 현상, 오류 전파, 검증 시점,
+                  비용과 성능의 균형을 주요 설계 질문으로 삼고 있습니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">04 / STATUS</span>
+              <div>
+                <h2>Experimental, evolving.</h2>
+                <p>
+                  개인 연구 및 개발 중인 프로젝트입니다. 완료되거나 검증되지
+                  않은 기능을 상용 기능으로 표현하지 않습니다.
+                </p>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <span>© 2026 UNHAINE. BUILT WITH PURPOSE.</span>
+      <span>SEOUL, KOREA</span>
+    </footer>
+    <button
+      class="chat-launch"
+      id="chat-launch"
+      aria-label="Ask Unhaine 열기"
+      aria-expanded="false"
+      aria-controls="chat-panel"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <section class="chat-panel" id="chat-panel" aria-label="Ask Unhaine">
+      <div class="chat-head">
+        <svg
+          class="chat-symbol"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+        <button id="chat-close" class="chat-close" aria-label="닫기">×</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="bubble bot">On Construction</div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <textarea
+          id="chat-input"
+          rows="1"
+          placeholder="Ask Me Anything!"
+          aria-label="질문 입력"
+        ></textarea>
+        <div class="chat-form-actions">
+          <button type="submit" aria-label="메시지 보내기">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 19V5m-6 6 6-6 6 6"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+    <script src="background.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

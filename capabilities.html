@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Unhaine — 비즈니스, 소프트웨어, AI 엔지니어링 포트폴리오"
+    />
+    <title>Capabilities | Unhaine</title>
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSansKR-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="capabilities-page about-detail-page document-page overview-page chat-enabled"
+  >
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        unhaine
+        <span class="star">.</span>
+      </a>
+      <nav id="main-nav" class="desktop-nav">
+        <a href="index.html" class="">Main</a>
+        <a href="about.html" class="active">About</a>
+        <a href="portfolio.html" class="">Portfolio</a>
+        <a href="blog.html" class="">Blog</a>
+        <a href="contact.html" class="">Contact</a>
+      </nav>
+      <button id="menu-toggle" class="mobile-toggle" aria-label="메뉴 열기">
+        ☰
+      </button>
+    </header>
+    <main class="site-main">
+      <div class="document-layout">
+        <aside class="detail-sidebar">
+          <a class="detail-parent" href="about.html">← About</a>
+          <nav class="detail-nav" aria-label="About 하위 페이지">
+            <a href="career.html">
+              <span>01</span>
+              Career
+            </a>
+            <a href="education.html">
+              <span>02</span>
+              Education
+            </a>
+            <a href="capabilities.html" class="active" aria-current="page">
+              <span>03</span>
+              Capabilities
+            </a>
+            <a href="values.html">
+              <span>04</span>
+              Values
+            </a>
+          </nav>
+        </aside>
+        <div class="detail-content">
+          <header class="detail-heading">
+            <h1>
+              Capabilities
+              <span class="period">.</span>
+            </h1>
+            <p>
+              고객과 업무를 이해하는 경험을 바탕으로,
+              <br class="intro-break" />
+              문제 정의와 설계, 구현을 연결하는 역량을 키워갑니다.
+            </p>
+          </header>
+          <section class="detail-list" aria-label="capabilities 목록">
+            <article class="detail-item">
+              <span class="detail-label">BUSINESS</span>
+              <div>
+                <h2>요구와 문제 이해</h2>
+                <p>
+                  고객과 대화하며 실제 업무 흐름을 파악하고, 해결할 문제와 범위,
+                  제약을 정리합니다.
+                </p>
+              </div>
+            </article>
+            <article class="detail-item">
+              <span class="detail-label">WORKFLOW</span>
+              <div>
+                <h2>업무 흐름 설계</h2>
+                <p>
+                  요구사항과 업무 규칙, 데이터 구조, 화면 흐름을 정리하고 반복
+                  작업을 줄일 방법을 고민합니다.
+                </p>
+              </div>
+            </article>
+            <article class="detail-item">
+              <span class="detail-label">BUILDING</span>
+              <div>
+                <h2>직접 구현하며 배우기</h2>
+                <p>
+                  웹 업무 시스템, VBA, SQL을 활용한 구현 경험을 쌓고, AI
+                  에이전트 실행과 검증 방식도 실험합니다.
+                </p>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <span>© 2026 UNHAINE. BUILT WITH PURPOSE.</span>
+      <span>SEOUL, KOREA</span>
+    </footer>
+    <button
+      class="chat-launch"
+      id="chat-launch"
+      aria-label="Ask Unhaine 열기"
+      aria-expanded="false"
+      aria-controls="chat-panel"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <section class="chat-panel" id="chat-panel" aria-label="Ask Unhaine">
+      <div class="chat-head">
+        <svg
+          class="chat-symbol"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+        <button id="chat-close" class="chat-close" aria-label="닫기">×</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="bubble bot">On Construction</div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <textarea
+          id="chat-input"
+          rows="1"
+          placeholder="Ask Me Anything!"
+          aria-label="질문 입력"
+        ></textarea>
+        <div class="chat-form-actions">
+          <button type="submit" aria-label="메시지 보내기">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 19V5m-6 6 6-6 6 6"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+    <script src="background.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

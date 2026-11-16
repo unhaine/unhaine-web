@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Unhaine — 비즈니스, 소프트웨어, AI 엔지니어링 포트폴리오"
+    />
+    <title>Contact | Unhaine</title>
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSansKR-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="contact-page overview-page chat-enabled">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        unhaine
+        <span class="star">.</span>
+      </a>
+      <nav id="main-nav" class="desktop-nav">
+        <a href="index.html" class="">Main</a>
+        <a href="about.html" class="">About</a>
+        <a href="portfolio.html" class="">Portfolio</a>
+        <a href="blog.html" class="">Blog</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <button id="menu-toggle" class="mobile-toggle" aria-label="메뉴 열기">
+        ☰
+      </button>
+    </header>
+    <main class="site-main">
+      <div class="page-heading">
+        <span class="eyebrow">04 / CONTACT</span>
+        <h1>
+          Exploring what’s next.
+          <br />
+          <em>Building it together.</em>
+        </h1>
+        <p class="lead">
+          함께 풀어볼 문제와 새로운 기회,
+          <br class="intro-break" />
+          협업에 관한 이야기를 기다립니다.
+        </p>
+      </div>
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-index" aria-hidden="true">01</span>
+          <h2>Email</h2>
+          <p>새로운 기회와 협업에 관한 대화</p>
+          <span class="contact-status">공개 준비 중</span>
+        </li>
+        <li class="contact-item">
+          <span class="contact-index" aria-hidden="true">02</span>
+          <h2>GitHub</h2>
+          <p>소스 코드 및 프로젝트 활동</p>
+          <span class="contact-status">공개 준비 중</span>
+        </li>
+        <li class="contact-item">
+          <span class="contact-index" aria-hidden="true">03</span>
+          <h2>LinkedIn</h2>
+          <p>경력과 전문 네트워크</p>
+          <span class="contact-status">공개 준비 중</span>
+        </li>
+        <li class="contact-item">
+          <span class="contact-index" aria-hidden="true">04</span>
+          <h2>Résumé</h2>
+          <p>다운로드 가능한 PDF 이력서</p>
+          <span class="contact-status">공개 준비 중</span>
+        </li>
+      </ul>
+    </main>
+    <footer class="site-footer">
+      <span>© 2026 UNHAINE. BUILT WITH PURPOSE.</span>
+      <span>SEOUL, KOREA</span>
+    </footer>
+    <button
+      class="chat-launch"
+      id="chat-launch"
+      aria-label="Ask Unhaine 열기"
+      aria-expanded="false"
+      aria-controls="chat-panel"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <section class="chat-panel" id="chat-panel" aria-label="Ask Unhaine">
+      <div class="chat-head">
+        <svg
+          class="chat-symbol"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+        <button id="chat-close" class="chat-close" aria-label="닫기">×</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="bubble bot">On Construction</div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <textarea
+          id="chat-input"
+          rows="1"
+          placeholder="Ask Me Anything!"
+          aria-label="질문 입력"
+        ></textarea>
+        <div class="chat-form-actions">
+          <button type="submit" aria-label="메시지 보내기">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 19V5m-6 6 6-6 6 6"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+    <script src="background.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

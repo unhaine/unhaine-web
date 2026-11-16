@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <style>
+    .wave-field {
+      transform-origin: 600px 400px;
+      animation: wave-drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes wave-drift {
+      from { transform: translateY(-9px) rotate(-.5deg) scale(1.02); }
+      to { transform: translateY(9px) rotate(.5deg) scale(1.02); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wave-field { animation: none; }
+      .spark { display: none; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="wave" x1="0" y1="400" x2="1200" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#215275" stop-opacity="0" />
+      <stop offset=".5" stop-color="#19d7c7" stop-opacity=".42" />
+      <stop offset="1" stop-color="#3783aa" stop-opacity=".65" />
+    </linearGradient>
+  </defs>
+  <g class="wave-field">
+    <g stroke="url(#wave)" stroke-width="1">
+    <path id="wave-0" d="M0 45 C170 135 250 135 395 40 S590 100 745 50 S950 -10 1200 35" />
+    <path id="wave-1" d="M0 68 C170 158 250 158 395 63 S590 123 745 73 S950 13 1200 58" />
+    <path id="wave-2" d="M0 91 C170 181 250 181 395 86 S590 146 745 96 S950 36 1200 81" />
+    <path id="wave-3" d="M0 114 C170 204 250 204 395 109 S590 169 745 119 S950 59 1200 104" />
+    <path id="wave-4" d="M0 137 C170 227 250 227 395 132 S590 192 745 142 S950 82 1200 127" />
+    <path id="wave-5" d="M0 160 C170 250 250 250 395 155 S590 215 745 165 S950 105 1200 150" />
+    <path id="wave-6" d="M0 183 C170 273 250 273 395 178 S590 238 745 188 S950 128 1200 173" />
+    <path id="wave-7" d="M0 206 C170 296 250 296 395 201 S590 261 745 211 S950 151 1200 196" />
+    <path id="wave-8" d="M0 229 C170 319 250 319 395 224 S590 284 745 234 S950 174 1200 219" />
+    <path id="wave-9" d="M0 252 C170 342 250 342 395 247 S590 307 745 257 S950 197 1200 242" />
+    <path id="wave-10" d="M0 275 C170 365 250 365 395 270 S590 330 745 280 S950 220 1200 265" />
+    <path id="wave-11" d="M0 298 C170 388 250 388 395 293 S590 353 745 303 S950 243 1200 288" />
+    <path id="wave-12" d="M0 321 C170 411 250 411 395 316 S590 376 745 326 S950 266 1200 311" />
+    <path id="wave-13" d="M0 344 C170 434 250 434 395 339 S590 399 745 349 S950 289 1200 334" />
+    <path id="wave-14" d="M0 367 C170 457 250 457 395 362 S590 422 745 372 S950 312 1200 357" />
+    <path id="wave-15" d="M0 390 C170 480 250 480 395 385 S590 445 745 395 S950 335 1200 380" />
+    <path id="wave-16" d="M0 413 C170 503 250 503 395 408 S590 468 745 418 S950 358 1200 403" />
+    <path id="wave-17" d="M0 436 C170 526 250 526 395 431 S590 491 745 441 S950 381 1200 426" />
+    <path id="wave-18" d="M0 459 C170 549 250 549 395 454 S590 514 745 464 S950 404 1200 449" />
+    <path id="wave-19" d="M0 482 C170 572 250 572 395 477 S590 537 745 487 S950 427 1200 472" />
+    <path id="wave-20" d="M0 505 C170 595 250 595 395 500 S590 560 745 510 S950 450 1200 495" />
+    <path id="wave-21" d="M0 528 C170 618 250 618 395 523 S590 583 745 533 S950 473 1200 518" />
+    <path id="wave-22" d="M0 551 C170 641 250 641 395 546 S590 606 745 556 S950 496 1200 541" />
+    <path id="wave-23" d="M0 574 C170 664 250 664 395 569 S590 629 745 579 S950 519 1200 564" />
+    <path id="wave-24" d="M0 597 C170 687 250 687 395 592 S590 652 745 602 S950 542 1200 587" />
+    <path id="wave-25" d="M0 620 C170 710 250 710 395 615 S590 675 745 625 S950 565 1200 610" />
+    <path id="wave-26" d="M0 643 C170 733 250 733 395 638 S590 698 745 648 S950 588 1200 633" />
+    </g>
+    <g class="spark">
+      <circle r="9" fill="#19d7c7" opacity=".04" />
+      <circle r="4" fill="#19d7c7" opacity=".16" />
+      <circle r="1.6" fill="#96fff0" opacity=".85" />
+      <animateMotion dur="22s" begin="-5s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#wave-8" />
+      </animateMotion>
+    </g>
+    <g class="spark">
+      <circle r="9" fill="#19d7c7" opacity=".04" />
+      <circle r="4" fill="#19d7c7" opacity=".16" />
+      <circle r="1.6" fill="#96fff0" opacity=".85" />
+      <animateMotion dur="28s" begin="-17s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#wave-16" />
+      </animateMotion>
+    </g>
+    <g class="spark">
+      <circle r="9" fill="#19d7c7" opacity=".04" />
+      <circle r="4" fill="#19d7c7" opacity=".16" />
+      <circle r="1.6" fill="#96fff0" opacity=".85" />
+      <animateMotion dur="32s" begin="-9s" repeatCount="indefinite" calcMode="linear">
+        <mpath href="#wave-22" />
+      </animateMotion>
+    </g>
+  </g>
+</svg>

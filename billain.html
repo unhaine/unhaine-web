@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Unhaine — 비즈니스, 소프트웨어, AI 엔지니어링 포트폴리오"
+    />
+    <title>Billain | Unhaine</title>
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSans-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/IBMPlexSansKR-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="billain-page project-detail-page document-page overview-page chat-enabled"
+  >
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        unhaine
+        <span class="star">.</span>
+      </a>
+      <nav id="main-nav" class="desktop-nav">
+        <a href="index.html" class="">Main</a>
+        <a href="about.html" class="">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="blog.html" class="">Blog</a>
+        <a href="contact.html" class="">Contact</a>
+      </nav>
+      <button id="menu-toggle" class="mobile-toggle" aria-label="메뉴 열기">
+        ☰
+      </button>
+    </header>
+    <main class="site-main">
+      <div class="document-layout">
+        <aside class="detail-sidebar">
+          <a class="detail-parent" href="portfolio.html">← Portfolio</a>
+          <nav class="detail-nav" aria-label="프로젝트 메뉴">
+            <a href="billain.html" class="active" aria-current="page">
+              <span>01</span>
+              Billain
+            </a>
+            <a href="kata.html">
+              <span>02</span>
+              kata
+            </a>
+          </nav>
+        </aside>
+        <div class="detail-content">
+          <header class="detail-heading">
+            <h1>
+              Billain
+              <span class="period">.</span>
+            </h1>
+            <p>
+              반복적인 통신료 청구 작업을 데이터 수집, 검증, 발송이 연결된 웹
+              기반 시스템으로 전환한 프로젝트.
+            </p>
+            <div class="tags">
+              <span>Workflow Design</span>
+              <span>Automation</span>
+              <span>Web Application</span>
+            </div>
+          </header>
+          <div class="project-visual billain-visual detail-visual">
+            <div class="fake-window">
+              <div class="window-top">
+                <i></i>
+                <i></i>
+                <i></i>
+                <span>Billain / Process</span>
+              </div>
+              <div class="mock-row mock-primary"></div>
+              <div class="mock-row"></div>
+              <div class="mock-row short"></div>
+              <div class="mock-metrics">
+                <b>UPLOAD</b>
+                <b>VALIDATE</b>
+                <b>SEND</b>
+              </div>
+            </div>
+          </div>
+          <section class="case-sections" aria-label="프로젝트 상세">
+            <article class="case-article">
+              <span class="detail-label">01 / THE PROBLEM</span>
+              <div>
+                <h2>Manual steps created friction.</h2>
+                <p>
+                  여러 곳에서 내려받은 청구 데이터를 취합하고 계정별로
+                  가공·검증한 뒤 PDF와 메일로 전달하는 과정에서 반복적인
+                  수작업이 발생했습니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">02 / MY ROLE</span>
+              <div>
+                <h2>From workflow to interface.</h2>
+                <p>
+                  업무 규칙, 데이터 구조, 사용자 인터페이스와 실제 운영 흐름을
+                  설계하고 웹 프론트엔드 구현을 주도했습니다. 백엔드 개발은
+                  협업으로 진행했습니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">03 / THE SOLUTION</span>
+              <div>
+                <h2>One connected workflow.</h2>
+                <p>
+                  파일 업로드 → 취합 결과 확인 → 검증 → 발송으로 이어지는 일관된
+                  프로세스를 구성했습니다.
+                </p>
+              </div>
+            </article>
+            <article class="case-article">
+              <span class="detail-label">04 / OUTCOME</span>
+              <div>
+                <h2>Days to hours.</h2>
+                <p>
+                  기존 약 3일 이상 걸리던 업무를 VBA 단계에서 1~2일로 줄였고, 웹
+                  시스템 도입 후 약 3~4시간 수준으로 단축했습니다.
+                </p>
+                <p class="note">
+                  수치는 당시 실제 운영 경험을 바탕으로 한 비교이며, 표준화된
+                  실험 측정치는 아닙니다.
+                </p>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <span>© 2026 UNHAINE. BUILT WITH PURPOSE.</span>
+      <span>SEOUL, KOREA</span>
+    </footer>
+    <button
+      class="chat-launch"
+      id="chat-launch"
+      aria-label="Ask Unhaine 열기"
+      aria-expanded="false"
+      aria-controls="chat-panel"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <section class="chat-panel" id="chat-panel" aria-label="Ask Unhaine">
+      <div class="chat-head">
+        <svg
+          class="chat-symbol"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+        <button id="chat-close" class="chat-close" aria-label="닫기">×</button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="bubble bot">On Construction</div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <textarea
+          id="chat-input"
+          rows="1"
+          placeholder="Ask Me Anything!"
+          aria-label="질문 입력"
+        ></textarea>
+        <div class="chat-form-actions">
+          <button type="submit" aria-label="메시지 보내기">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 19V5m-6 6 6-6 6 6"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+    <script src="background.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
