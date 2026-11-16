@@ -49,6 +49,7 @@ for (const file of await readdir('assets/billain')) {
   await emitAsset(source, await readFile(source));
 }
 await emitAsset('assets/kata/kata-mark-v2.png', await readFile('assets/kata/kata-mark-v2.png'));
+await emitAsset('assets/kata/harness-developer.jpg', await readFile('assets/kata/harness-developer.jpg'));
 const blogPages = await renderBlog();
 const pages = new Map(blogPages);
 const generatedBlogMarker = '<!-- Generated blog page: edit content/blog and templates, then run npm run build. -->';

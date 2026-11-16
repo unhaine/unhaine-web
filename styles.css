@@ -1942,79 +1942,89 @@ input:focus-visible {
   }
 }
 
-/* 30. Contact (contact.html / .contact-page) — 채널별 가로 리스트 */
-.contact-page .contact-list {
-  list-style: none;
+/* 30. Contact (contact.html / .contact-page) — 메일 복사와 GitHub 링크 */
+.contact-actions {
+  width: 100%;
+  max-width: 460px;
+  padding: 8px 0 24px;
+}
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
-.contact-page .contact-item {
-  display: grid;
-  grid-template-columns: 32px 160px minmax(0, 1fr) auto;
+.contact-address {
+  display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0;
   border: 0;
-  border-top: 1px solid var(--line);
-  padding: clamp(12px, 2svh, 18px) 0;
-  background: none;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: clamp(15px, 2.4vw, 20px);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 }
-.contact-page .contact-item:last-child {
-  border-bottom: 1px solid var(--line);
+.contact-address > span:not(.contact-action-icon) {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
-.contact-page .contact-item h2 {
-  font-size: 24px;
-  margin: 0;
+.contact-address > svg {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--muted);
 }
-.contact-page .contact-item p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0;
+.contact-action-icon {
+  display: inline-flex;
+  justify-content: center;
+  flex: 0 0 14px;
+  margin-left: -8px;
+  color: var(--muted);
 }
-.contact-page .contact-index {
+.contact-action-icon svg {
+  width: 14px;
+  height: 14px;
+}
+.contact-action-icon .copy-check,
+.contact-address.is-copied .copy-icon {
+  display: none;
+}
+.contact-address.is-copied .copy-check {
+  display: block;
+}
+.contact-address:hover,
+.contact-address:hover > svg,
+.contact-address:hover .contact-action-icon,
+.contact-address.is-copied .contact-action-icon {
   color: var(--accent);
-  font-size: 10px;
-  letter-spacing: 0.1em;
 }
-.contact-page .contact-item .contact-status {
-  color: #7e94a7;
-  font-size: 11px;
-  letter-spacing: 0;
+.contact-address:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
-@container (max-width: 700px) {
-  .contact-page .contact-item {
-    grid-template-columns: 20px minmax(0, 1fr) auto;
-    gap: 4px 12px;
-    padding: 12px 0;
-  }
-  .contact-page .contact-index {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .contact-page .contact-item h2 {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: 22px;
-  }
-  .contact-page .contact-item p {
-    grid-column: 2 / -1;
-    grid-row: 2;
-    font-size: 12px;
-  }
-  .contact-page .contact-status {
-    grid-column: 3;
-    grid-row: 1;
-  }
+.contact-actions .contact-copy-status {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
 }
-@media (max-height: 540px) and (min-width: 600px) {
-  .contact-page .contact-item {
-    padding: 10px 0;
-  }
-  .contact-page .contact-item h2 {
-    font-size: 22px;
-  }
-  .contact-page .contact-item p {
-    font-size: 13px;
-  }
+.contact-copy-status:empty {
+  display: none;
+}
+.contact-actions .contact-note {
+  margin: 2px 0 0 40px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
 }
 
 /* 31. Blog (blog.html / .blog-page) — 글 목록과 빈 상태 */
@@ -2606,6 +2616,44 @@ input:focus-visible {
   text-wrap: pretty;
 }
 .kata-page .case-article strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.kata-screenshot {
+  margin: 0 0 40px;
+}
+.kata-screenshot a {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.kata-screenshot a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.kata-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.kata-introduction h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.kata-introduction p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--detail-body-size);
+  line-height: 1.8;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.kata-introduction p + p {
+  margin-top: 12px;
+}
+.kata-introduction strong {
   color: var(--fg);
   font-weight: 600;
 }

@@ -146,3 +146,43 @@ document.querySelectorAll('[data-gallery]').forEach(gallery => {
     }
   });
 });
+
+// Contact address copying, including directly opened local previews.
+document.querySelectorAll('.contact-address[data-copy]').forEach(button => {
+  let resetTimer;
+  button.addEventListener('click', async () => {
+    const status = document.querySelector('.contact-copy-status');
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copy);
+      copied = true;
+    } catch {
+      const field = document.createElement('textarea');
+      const previousFocus = document.activeElement;
+      field.value = button.dataset.copy;
+      field.readOnly = true;
+      field.style.cssText = 'position:fixed;top:0;left:-9999px';
+      document.body.appendChild(field);
+      field.select();
+      try {
+        copied = document.execCommand('copy');
+      } catch {
+        copied = false;
+      } finally {
+        field.remove();
+        previousFocus?.focus();
+      }
+    }
+    clearTimeout(resetTimer);
+    button.classList.toggle('is-copied', copied);
+    status.textContent = copied
+      ? ''
+      : '복사하지 못했습니다. 주소를 직접 선택해 복사해 주세요.';
+    if (copied) {
+      resetTimer = setTimeout(() => {
+        button.classList.remove('is-copied');
+        status.textContent = '';
+      }, 2500);
+    }
+  });
+});
