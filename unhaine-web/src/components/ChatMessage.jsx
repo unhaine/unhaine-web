@@ -65,5 +65,6 @@ function blocks(tokens) {
 
 export default function ChatMessage({ text }) {
   // Model output is untrusted: render React nodes, never raw HTML.
-  return <div className="chat-markdown">{blocks(marked.lexer(text))}</div>;
+  // GFM's single-tilde deletion rule otherwise eats Korean ranges such as 1~2일 / 3~4시간.
+  return <div className="chat-markdown">{blocks(marked.lexer(text, { gfm: false }))}</div>;
 }

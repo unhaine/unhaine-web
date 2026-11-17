@@ -219,12 +219,14 @@ test("model HTML and dangerous URLs render as text, while site links use the rou
         MemoryRouter,
         null,
         createElement(ChatMessage, {
-          text: "<script>alert(1)</script>\n\n[unsafe](javascript:alert(1))\n\n[escape](https://unhaine.com/#//attacker.example/steal)\n\n[encoded](https://unhaine.com/#/%2fattacker.example)\n\n[Billain](https://unhaine.com/#/portfolio/billain)",
+          text: "약 1~2일, 이후 약 3~4시간\n\n<script>alert(1)</script>\n\n[unsafe](javascript:alert(1))\n\n[escape](https://unhaine.com/#//attacker.example/steal)\n\n[encoded](https://unhaine.com/#/%2fattacker.example)\n\n[Billain](https://unhaine.com/#/portfolio/billain)",
         }),
       ),
     );
     assert.doesNotMatch(html, /<script|href="javascript:|href="\/\/|href="[^\"]*attacker/);
     assert.match(html, /href="\/portfolio\/billain"/);
+    assert.match(html, /1~2일/);
+    assert.match(html, /3~4시간/);
   } finally {
     await server.close();
   }
