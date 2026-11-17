@@ -1,5 +1,10 @@
 # Unhaine static prototype
 
+React + Vite 버전은 `unhaine-web/`에 있습니다. 해당 폴더에서 `npm ci`, `npm run dev`로 실행합니다.
+GitHub Pages는 저장소 루트의 `.github/workflows/deploy-pages.yml`에서 React 버전을 빌드·배포합니다.
+React 버전의 구조와 사용법은 [unhaine-web/README.md](unhaine-web/README.md)를 참고하세요.
+아래 내용은 기존 정적 HTML 프로토타입에 대한 설명입니다.
+
 `index.html`을 브라우저에서 열면 시작합니다. 블로그 원고를 수정한 후에는 Node.js 20 이상에서 `npm ci` (최초 한 번), `npm run build`를 실행합니다. 블로그 목록과 상세 HTML을 현재 경로에 자동 생성하므로 기존처럼 파일을 직접 열어 확인할 수 있습니다. 압축된 전체 사이트는 `dist/index.html`에서도 확인할 수 있습니다.
 
 ## 페이지
