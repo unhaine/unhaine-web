@@ -93,6 +93,11 @@
 html {
   scroll-behavior: smooth;
 }
+@media (min-width: 781px) {
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+}
 body {
   margin: 0;
   background: var(--bg);
@@ -848,10 +853,44 @@ p {
     left: 0;
     right: 0;
     background: #0d1929;
-    padding: 22px;
+    padding: 22px 34px;
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
     border-bottom: 1px solid var(--line);
+  }
+  .desktop-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding-block: 10px;
+  }
+  .desktop-nav a::before {
+    content: "";
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    mask: var(--nav-icon) center / contain no-repeat;
+  }
+  .desktop-nav a[href="index.html"] {
+    --nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z'/%3E%3Cpath d='M9 21v-8h6v8'/%3E%3C/svg%3E");
+  }
+  .desktop-nav a[href="about.html"] {
+    --nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2'/%3E%3C/svg%3E");
+  }
+  .desktop-nav a[href="portfolio.html"] {
+    --nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='7' width='18' height='14' rx='2'/%3E%3Cpath d='M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12a20 20 0 0 0 18 0M12 12v3'/%3E%3C/svg%3E");
+  }
+  .desktop-nav a[href="blog.html"] {
+    --nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='M8 7h8M8 11h8M8 15h5'/%3E%3C/svg%3E");
+  }
+  .desktop-nav a[href="contact.html"] {
+    --nav-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 6 9 7 9-7'/%3E%3C/svg%3E");
+  }
+  .desktop-nav.open a.active::after {
+    display: none;
   }
   .desktop-nav.open {
     display: flex;
@@ -1361,6 +1400,25 @@ input:focus-visible {
   flex-shrink: 0;
   color: var(--accent);
 }
+.chat-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: auto;
+  padding: 24px 0;
+  text-align: center;
+  color: var(--muted);
+}
+.chat-placeholder-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.chat-placeholder p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
 
 /* 25. Ask 입력창 — 여러 줄 텍스트와 하단 전송 버튼 */
 .chat-form {
@@ -1791,7 +1849,7 @@ input:focus-visible {
   .overview-page {
     --overview-top: 20px;
     --overview-gap: 20px;
-    --header-height: 66px;
+    --header-height: 54px;
     --footer-height: 60px;
   }
   .overview-page .site-header,
@@ -2274,13 +2332,15 @@ input:focus-visible {
   max-width: 42em;
   text-wrap: balance;
 }
-.career-page .detail-item h3 {
+.career-page .detail-item h3,
+.values-page .detail-item h3 {
   margin: 20px 0 8px;
   font-size: 12px;
   font-weight: 600;
   color: var(--fg);
 }
-.career-page .detail-item ul {
+.career-page .detail-item ul,
+.values-page .detail-item ul {
   margin: 0;
   padding-left: 18px;
   font-size: var(--detail-body-size);
@@ -2323,6 +2383,13 @@ input:focus-visible {
 
 /* 33. 문서형 공통 — About 하위 / 개별 프로젝트
  * .document-page가 작은 제목·사이드 메뉴·본문 틀을 공유합니다. */
+@media (max-width: 780px) {
+  .about-detail-page.overview-page,
+  .project-detail-page.overview-page,
+  .blog-article-page.overview-page {
+    --overview-top: 0px;
+  }
+}
 .document-layout {
   flex: 1;
   min-height: 0;
@@ -2416,6 +2483,11 @@ input:focus-visible {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
   }
+  .about-detail-page .document-layout,
+  .project-detail-page .document-layout,
+  .blog-article-page .document-layout {
+    gap: 16px;
+  }
   .detail-sidebar {
     padding: 0;
   }
@@ -2429,11 +2501,12 @@ input:focus-visible {
   }
   .detail-nav a {
     justify-content: center;
-    min-height: 36px;
-    padding: 8px 0;
+    min-height: 28px;
+    padding: 4px 0;
     border-left: 0;
     border-bottom: 1px solid var(--line);
     font-size: 11px;
+    line-height: 18px;
   }
   .detail-nav a span {
     display: none;
@@ -3294,17 +3367,17 @@ input:focus-visible {
     max-height: 144px;
   }
   .archive-year summary {
-    padding: 6px 2px;
+    min-height: 28px;
+    padding: 4px 2px;
+    border-bottom: 1px solid var(--line);
+    font-size: 11px;
+    line-height: 18px;
   }
   .archive-year ul {
     margin-top: 4px;
   }
   .archive-year a {
     padding: 8px 12px;
-  }
-  .blog-archive {
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 10px;
   }
 }
 

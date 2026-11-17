@@ -1,5 +1,19 @@
 [
   {
+    "slug": "expanding-tastes",
+    "title": "고집을 버린 건 아니고, 취향을 늘렸습니다",
+    "summary": "록과 메탈을 좋아하던 사람이 판소리와 그레고리오 성가까지 듣게 된 이야기.",
+    "date": "2026-11-17",
+    "category": "가치관"
+  },
+  {
+    "slug": "results-over-intentions",
+    "title": "진심만으론 아무도 설득할 수 없다.",
+    "summary": "대학가요제에서의 실패가 지금의 일하는 방식에 남긴 것.",
+    "date": "2026-11-17",
+    "category": "가치관"
+  },
+  {
     "slug": "kata",
     "title": "만들고 있는데, 아직 어렵습니다 — kata",
     "summary": "AI 에이전트와 함께 일하는 방식을 직접 설계해 보는 이야기.",
