@@ -73,10 +73,10 @@
             </h1>
             <p class="case-subtitle">AI Agent Harness &amp; Orchestration</p>
           </header>
-          <figure class="project-gallery kata-screenshot">
-            <a href="assets/kata/harness-developer.jpg" target="_blank" rel="noopener noreferrer" aria-label="kata Harness 화면 원본 보기 (새 탭)">
+          <figure class="project-gallery kata-screenshot" data-image-preview>
+            <button class="gallery-open" type="button" aria-label="kata Harness 화면 확대 보기" aria-haspopup="dialog">
               <img src="assets/kata/harness-developer.jpg" width="2880" height="1620" alt="kata의 Harness 편집 화면. Developer 에이전트의 지침, 작업 흐름과 연결된 역량을 관리합니다." decoding="async" />
-            </a>
+            </button>
             <figcaption class="kata-introduction">
               <h2>작업의 흔적에 형태를 부여하다</h2>
               <p>
@@ -90,6 +90,15 @@
                 </strong>
               </p>
             </figcaption>
+            <dialog class="gallery-dialog" aria-label="kata Harness 화면 확대 보기">
+              <div class="gallery-dialog-header">
+                <p class="gallery-dialog-caption">kata Harness — Developer 에이전트의 작업 지침과 실행 흐름</p>
+                <button class="gallery-close" type="button" aria-label="확대 보기 닫기">
+                  닫기 ×
+                </button>
+              </div>
+              <img width="2880" height="1620" alt="" />
+            </dialog>
           </figure>
           <section class="case-sections" aria-label="프로젝트 상세">
             <article class="case-article">
@@ -188,12 +197,13 @@
               </div>
             </article>
             <article class="case-article">
-              <span class="detail-label">04 / WORK IN PROGRESS</span>
+              <span class="detail-label">04 / STORY</span>
               <div>
-                <h2>만들고 있는데, 아직 어렵습니다.</h2>
+                <h2>관련 이야기</h2>
                 <p>
-                  생각보다 풀어야 할 문제가 많습니다. 아직은 시행착오를 거듭하고
-                  있지만, 직접 만들고 실험하며 조금씩 형태를 갖춰가고 있습니다.
+                  <a class="text-link" href="blog-kata.html">
+                    만들고 있는데, 아직 어렵습니다 — kata ↗
+                  </a>
                 </p>
               </div>
             </article>
