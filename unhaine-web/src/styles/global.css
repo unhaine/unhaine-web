@@ -3516,3 +3516,15 @@ input:focus-visible {
   .chat-pending-text, .chat-pending-dots i { animation: none; }
   .chat-pending-text { background: none; -webkit-text-fill-color: currentColor; }
 }
+
+.article-media-row { display: grid; grid-template-columns: minmax(140px, 210px) minmax(0, 1fr); gap: 28px; margin: 24px 0; align-items: stretch; }
+.article-media-row .article-figure { display: flex; flex-direction: column; gap: 10px; min-width: 0; margin: 0; text-align: center; }
+.article-image-frame { position: relative; flex: 1; min-height: 0; }
+.article-image-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: top center; border-radius: 4px; }
+.article-figure figcaption { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.article-media-text > p:first-child { margin-top: 0; }
+.article-media-text > p:last-child { margin-bottom: 0; }
+@media (max-width: 600px) {
+  .article-media-row { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .article-image-frame { flex: none; height: 320px; }
+}

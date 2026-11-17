@@ -41,7 +41,7 @@ export default function Home() {
             만든 공간입니다.
           </p>
           <p>
-            자유롭게 둘러보시고, 궁금한 점이 있다면
+            자유롭게 둘러보시고, 궁금한 점이 있다면{" "}
             <Link to={"/contact"}>편하게 연락 주세요.</Link>
           </p>
         </div>
