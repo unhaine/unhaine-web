@@ -1,0 +1,34 @@
+{
+  "name": "unhaine-chat-api",
+  "main_module": "index.js",
+  "compatibility_date": "2026-11-17",
+  "keep_bindings": ["secret_text"],
+  "bindings": [
+    {
+      "type": "plain_text",
+      "name": "OPENAI_AGENT_ID",
+      "text": "agent_6afbd55bbfdc8191833004482a12a0be"
+    },
+    {
+      "type": "ratelimit",
+      "name": "CHAT_RATE_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 10, "period": 60 }
+    },
+    {
+      "type": "ratelimit",
+      "name": "TOTAL_RATE_LIMIT",
+      "namespace_id": "1002",
+      "simple": { "limit": 60, "period": 60 }
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false,
+      "head_sampling_rate": 1
+    },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
+  }
+}
