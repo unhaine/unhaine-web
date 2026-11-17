@@ -46,7 +46,7 @@ React 버전의 구조와 사용법은 [unhaine-web/README.md](unhaine-web/READM
 
 검색 결과에 노출되지 않도록 빌드 시 모든 HTML에 `robots: noindex` 메타 태그를 추가하고, `dist/_headers`에 모든 경로의 `X-Robots-Tag: noindex` 응답 헤더를 설정합니다. 새 페이지에도 자동 적용됩니다. 검색엔진이 이 지침을 확인해야 하므로 `robots.txt`로 크롤링을 차단하지 않습니다. 운영 사이트에는 배포 후 적용되며, 이미 검색에 등록된 주소가 사라지기까지는 재수집 시간이 필요합니다. 주소를 아는 사람의 접근을 막는 설정은 아닙니다.
 
-`npm ci` 후 `npm run build`를 실행하면 `dist/`에 HTML·CSS·JS 압축본과 폰트·프로젝트 이미지를 생성합니다. Cloudflare Workers Builds의 빌드 명령은 `npm run build`, 배포 명령은 `npx wrangler deploy --assets ./dist --name unhaine-web --compatibility-date 2026-11-16`입니다. 서버 실행 코드 없이 정적 파일을 제공합니다.
+`npm ci` 후 `npm run build`를 실행하면 기존 정적 프로토타입의 `dist/`에 HTML·CSS·JS 압축본과 폰트·프로젝트 이미지를 생성합니다. 현재 운영 사이트는 `unhaine-web/`의 React 버전을 GitHub Pages로 배포하며, 운영 주소는 https://unhaine.com/ 입니다. 기존 Cloudflare Worker와 Workers Builds 자동 빌드 트리거는 삭제했습니다. Cloudflare는 도메인의 DNS를 관리합니다.
 
 폰트의 compact 디렉터리는 현재 페이지와 챗 데모에서 사용하는 문자를 모은 IBM Plex Sans KR 서브셋입니다. CSS의 unicode-range로 먼저 사용하며, 그 밖의 문자는 원본 폰트가 처리합니다. 새 문구도 표시됩니다. 파일명에 콘텐츠 해시를 붙여 리소스는 1년 캐시하고, HTML은 60초 캐시합니다.
 
