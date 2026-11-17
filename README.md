@@ -20,6 +20,7 @@
   - kata 개발 이야기: `blog-kata.html` (자동 생성)
   - 결과와 완성도에 대한 이야기: `blog-results-over-intentions.html` (자동 생성)
   - 취향과 유연함에 대한 이야기: `blog-expanding-tastes.html` (자동 생성)
+  - 주도적으로 일하는 방식에 대한 이야기: `blog-taking-initiative.html` (자동 생성)
 - Contact: `contact.html`
 
 모든 페이지에서 Ask Unhaine 버튼이 작동합니다. 현재 키워드 기반 데모 응답만 제공하고 실제 AI API를 호출하지 않습니다. 개인정보와 외부 URL은 임의로 생성하지 않았습니다.
