@@ -70,8 +70,14 @@ Markdown은 저장소 작성자가 관리하는 신뢰된 콘텐츠입니다. �
 2. `main` 브랜치에 푸시하면 포함된 워크플로가 테스트·빌드 후 배포합니다.
 3. 기본 브랜치가 다르면 저장소 루트의 `.github/workflows/deploy-pages.yml`에서 브랜치를 수정합니다.
 
-배포 설정 완료 후 사용할 주소: https://unhaine.github.io/unhaine-web/
+운영 주소: https://unhaine.com/
+GitHub Pages 기본 주소: https://unhaine.github.io/unhaine-web/ (운영 도메인으로 이동)
 GitHub Free의 비공개 저장소는 Pages를 지원하지 않으므로, 공개 저장소 또는 Pages를 지원하는 유료 플랜이 필요합니다.
+
+커스텀 도메인은 GitHub 저장소의 **Settings → Pages → Custom domain**에 `unhaine.com`으로 설정합니다.
+Cloudflare DNS에서 루트 도메인의 A 레코드는 `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`으로,
+`www`의 CNAME 레코드는 `unhaine.github.io`로 설정합니다. 해당 레코드는 DNS only이며, 기존 Worker의 커스텀 도메인 연결은 해제합니다.
+GitHub 인증서 발급 후 **Enforce HTTPS**를 활성화합니다. GitHub Actions 배포이므로 `CNAME` 파일은 필요하지 않습니다.
 
 Vite의 상대 경로 `base: './'`와 해시 라우팅으로 저장소 하위 경로에서도 에셋과 링크가 동작합니다.
 검색 노출 제외를 위한 `robots: noindex` 메타 태그를 유지합니다.
