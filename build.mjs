@@ -64,9 +64,13 @@ for (const file of await readdir('.')) {
   }
   pages.set(file, source);
 }
+// Apply indexing rules centrally so newly added pages are covered as well.
+for (const [file, html] of pages) {
+  pages.set(file, html.replace('<head>', '<head>\n    <meta name="robots" content="noindex" />'));
+}
 // Keep local, directly openable HTML previews alongside the existing pages.
-for (const [file, html] of blogPages) {
-  await writeFile(file, `${generatedBlogMarker}\n${html}`);
+for (const file of blogPages.keys()) {
+  await writeFile(file, `${generatedBlogMarker}\n${pages.get(file)}`);
 }
 for (const [file, sourceHtml] of pages) {
   let html = sourceHtml;
@@ -76,5 +80,5 @@ for (const [file, sourceHtml] of pages) {
 }
 await copyFile('assets/fonts/IBM-Plex-LICENSE.txt', join(output, 'assets/IBM-Plex-LICENSE.txt'));
 await copyFile('assets/icons/Lucide-LICENSE.txt', join(output, 'assets/Lucide-LICENSE.txt'));
-await writeFile(join(output, '_headers'), '/*\n  Cache-Control: public, max-age=60\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n');
+await writeFile(join(output, '_headers'), '/*\n  X-Robots-Tag: noindex\n  Cache-Control: public, max-age=60\n/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n');
 console.log('Built static website in dist/');

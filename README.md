@@ -14,6 +14,10 @@
 - Blog: `blog.html` (자동 생성)
   - Billain 개발 이야기: `blog-billain.html` (자동 생성)
   - 영업에서 AI로 이어진 이야기: `blog-ai-journey.html` (자동 생성)
+  - 공백의 2년: `blog-career-break.html` (자동 생성)
+  - 고객과 신뢰에 대한 이야기: `blog-sales-and-trust.html` (자동 생성)
+  - Billain 바이브코딩 경험: `blog-billain-vibe-coding.html` (자동 생성)
+  - kata 개발 이야기: `blog-kata.html` (자동 생성)
 - Contact: `contact.html`
 
 모든 페이지에서 Ask Unhaine 버튼이 작동합니다. 현재 키워드 기반 데모 응답만 제공하고 실제 AI API를 호출하지 않습니다. 개인정보와 외부 URL은 임의로 생성하지 않았습니다.
@@ -31,6 +35,8 @@
 공통 디자인은 `templates/blog-index.html`, `templates/blog-article.html`과 `styles.css`에서 관리합니다. Markdown은 저장소 작성자가 관리하는 콘텐츠이며 방문자 입력을 렌더링하는 기능은 없습니다. 글 추가만으로 운영 사이트에 반영되지는 않으며 GitHub 업로드와 배포는 별도로 진행합니다.
 
 ## 배포
+
+검색 결과에 노출되지 않도록 빌드 시 모든 HTML에 `robots: noindex` 메타 태그를 추가하고, `dist/_headers`에 모든 경로의 `X-Robots-Tag: noindex` 응답 헤더를 설정합니다. 새 페이지에도 자동 적용됩니다. 검색엔진이 이 지침을 확인해야 하므로 `robots.txt`로 크롤링을 차단하지 않습니다. 운영 사이트에는 배포 후 적용되며, 이미 검색에 등록된 주소가 사라지기까지는 재수집 시간이 필요합니다. 주소를 아는 사람의 접근을 막는 설정은 아닙니다.
 
 `npm ci` 후 `npm run build`를 실행하면 `dist/`에 HTML·CSS·JS 압축본과 폰트·프로젝트 이미지를 생성합니다. Cloudflare Workers Builds의 빌드 명령은 `npm run build`, 배포 명령은 `npx wrangler deploy --assets ./dist --name unhaine-web --compatibility-date 2026-11-16`입니다. 서버 실행 코드 없이 정적 파일을 제공합니다.
 
