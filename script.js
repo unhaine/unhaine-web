@@ -147,6 +147,22 @@ document.querySelectorAll('[data-gallery]').forEach(gallery => {
   });
 });
 
+document.querySelectorAll('[data-image-preview]').forEach(preview => {
+  const image = preview.querySelector('.gallery-open img');
+  const dialog = preview.querySelector('.gallery-dialog');
+  const enlarged = dialog.querySelector('img');
+
+  preview.querySelector('.gallery-open').addEventListener('click', () => {
+    enlarged.src = image.src;
+    enlarged.alt = image.alt;
+    dialog.showModal();
+  });
+  preview.querySelector('.gallery-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
+  });
+});
+
 // Contact address copying, including directly opened local previews.
 document.querySelectorAll('.contact-address[data-copy]').forEach(button => {
   let resetTimer;
