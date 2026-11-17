@@ -231,3 +231,92 @@ test("model HTML and dangerous URLs render as text, while site links use the rou
     await server.close();
   }
 });
+
+
+test("Worker delivers text before completion, then cleans the session", { timeout: 3000 }, async () => {
+  const { readChatStream } = await import("../src/lib/chat-stream.js");
+  const encoder = new TextEncoder();
+  let upstream, deleted = false;
+  const source = new ReadableStream({ start(c) { upstream = c; } });
+  const tasks = [];
+  const handler = createHandler(async (url, options) => {
+    if (options?.method === "DELETE") { deleted = true; return new Response("{}"); }
+    if (url.endsWith("ai-context.json")) return Response.json({ version: 1, documents: docs });
+    return new Response(source);
+  });
+  const req = request();
+  req.headers.set("Accept", "text/event-stream");
+  const response = await handler.fetch(req, env(), { waitUntil(p) { tasks.push(p); } });
+  assert.match(response.headers.get("Content-Type"), /text\/event-stream/);
+  let firstText;
+  const prefix = new Promise(resolve => { firstText = resolve; });
+  let completed = false;
+  const answer = readChatStream(response.body, firstText).then(text => { completed = true; return text; });
+  upstream.enqueue(encoder.encode(event({ type: "agent.session.created", session: { id: "sess_test" } }) +
+    event({ type: "agent.session.turn.output_text.delta", item_id: "m1", content_index: 0, delta: "생성 중" })));
+  assert.equal(await prefix, "생성 중");
+  assert.equal(completed, false);
+  assert.equal(deleted, false);
+  upstream.enqueue(encoder.encode(event({ type: "agent.session.turn.output_text.done", item_id: "m1", content_index: 0, text: "완성된 답변" }) + event({ type: "agent.session.turn.completed" })));
+  assert.equal(await answer, "완성된 답변");
+  await Promise.all(tasks);
+  assert.equal(deleted, true);
+});
+
+test("frontend rejects truncated and failed streams after showing partial text", async () => {
+  const { readChatStream } = await import("../src/lib/chat-stream.js");
+  for (const tail of ["", event({ type: "error", error: "중단됨" })]) {
+    const shown = [];
+    await assert.rejects(readChatStream(new Response(event({ type: "text", text: "일부 답변" }) + tail).body, text => shown.push(text)));
+    assert.deepEqual(shown, ["일부 답변"]);
+  }
+});
+
+test("cancelling the response aborts generation and removes the temporary session", { timeout: 3000 }, async () => {
+  const encoder = new TextEncoder();
+  let upstream, signal, deleted = false, cancelled = false;
+  const source = new ReadableStream({ start(c) { upstream = c; }, cancel() { cancelled = true; } });
+  const tasks = [];
+  const handler = createHandler(async (url, options) => {
+    if (options?.method === "DELETE") { deleted = true; return new Response("{}"); }
+    if (url.endsWith("ai-context.json")) return Response.json({ version: 1, documents: docs });
+    signal = options.signal;
+    return new Response(source);
+  });
+  const req = request(); req.headers.set("Accept", "text/event-stream");
+  const response = await handler.fetch(req, env(), { waitUntil(p) { tasks.push(p); } });
+  const reader = response.body.getReader();
+  await reader.read(); // ready
+  upstream.enqueue(encoder.encode(event({ type: "agent.session.created", session: { id: "sess_test" } }) +
+    event({ type: "agent.session.turn.output_text.delta", delta: "일부 답변" })));
+  await reader.read();
+  await reader.cancel();
+  await Promise.all(tasks);
+  assert.equal(signal.aborted, true);
+  assert.equal(cancelled, true);
+  assert.equal(deleted, true);
+});
+
+
+test("request abort unblocks a stalled response and cleans up", { timeout: 3000 }, async () => {
+  let upstream, deleted = false;
+  const tasks = [];
+  const handler = createHandler(async (url, options) => {
+    if (options?.method === "DELETE") { deleted = true; return new Response("{}"); }
+    if (url.endsWith("ai-context.json")) return Response.json({ version: 1, documents: docs });
+    return new Response(new ReadableStream({ start(c) { upstream = c; } }));
+  });
+  const abort = new AbortController();
+  const req = new Request(request(), { signal: abort.signal });
+  req.headers.set("Accept", "text/event-stream");
+  const response = await handler.fetch(req, env(), { waitUntil(p) { tasks.push(p); } });
+  const reader = response.body.getReader();
+  await reader.read();
+  upstream.enqueue(new TextEncoder().encode(event({ type: "agent.session.created", session: { id: "sess_test" } }) +
+    event({ type: "agent.session.turn.output_text.delta", delta: "stalled" })));
+  await new Promise(resolve => setImmediate(resolve));
+  abort.abort();
+  await Promise.all(tasks);
+  assert.equal(deleted, true);
+  await assert.rejects(reader.read());
+});

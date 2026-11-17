@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import ChatMessage from "./ChatMessage";
+import { readChatStream } from "../lib/chat-stream";
 
 const CHAT_API_URL =
   import.meta.env.VITE_CHAT_API_URL ||
@@ -116,42 +117,51 @@ export default function Chat() {
     sending.current = true;
     setPending(true);
     setError("");
-    const history = messages.slice(-8).map((message) => ({
+    const history = messages.filter(message => !message.incomplete).slice(-8).map((message) => ({
       role: message.kind === "user" ? "user" : "assistant",
       text: message.text.slice(0, 4000),
     }));
-    setMessages((previous) => [...previous, { kind: "user", text: question }]);
+    setMessages((previous) => [...previous,
+      { kind: "user", text: question },
+      { kind: "bot", text: "", streaming: true },
+    ]);
     setInput("");
     const controller = new AbortController();
     requestController.current = controller;
     const timeout = setTimeout(() => controller.abort(), 65_000);
+    let receivedText = "";
+    const updateAnswer = (text) => {
+      receivedText = text;
+      if (!mounted.current) return;
+      setConnection("connected");
+      setMessages(previous => previous.map((message, index) =>
+        index === previous.length - 1 ? { ...message, text } : message));
+    };
     try {
       const response = await fetch(CHAT_API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
         body: JSON.stringify({ question, page: pathname, history }),
         signal: controller.signal,
       });
-      const result = await response.json().catch(() => {
-        throw new Error(
-          "챗 서버의 응답을 읽지 못했습니다. 잠시 후 다시 시도해 주세요.",
-        );
-      });
-      if (!response.ok)
-        throw new Error(
-          result.error || "답변을 가져오지 못했습니다. 다시 시도해 주세요.",
-        );
-      if (typeof result.text !== "string" || !result.text.trim())
-        throw new Error("답변을 가져오지 못했습니다. 다시 시도해 주세요.");
-      setConnection("connected");
-      setMessages((previous) => [
-        ...previous,
-        { kind: "bot", text: result.text },
-      ]);
+      if (response.ok && response.headers.get("Content-Type")?.includes("text/event-stream")) {
+        await readChatStream(response.body, updateAnswer, controller.signal);
+      } else {
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "답변을 가져오지 못했습니다.");
+        if (typeof result.text !== "string" || !result.text.trim())
+          throw new Error("답변을 가져오지 못했습니다.");
+        updateAnswer(result.text);
+      }
+      if (mounted.current) setMessages(previous => previous.map((message, index) =>
+        index === previous.length - 1 ? { ...message, streaming: false } : message));
     } catch (failure) {
       if (!mounted.current) return;
       setConnection("disconnected");
-      setMessages((previous) => previous.slice(0, -1));
+      setMessages(previous => receivedText
+        ? previous.map((message, index) => index >= previous.length - 2
+          ? { ...message, streaming: false, incomplete: true } : message)
+        : previous.slice(0, -2));
       setInput(question);
       setError(
         failure.name === "AbortError"
@@ -228,7 +238,12 @@ export default function Chat() {
             messages.map((message, index) => (
               <div key={index} className={`bubble ${message.kind}`}>
                 {message.kind === "bot" ? (
-                  <ChatMessage text={message.text} />
+                  message.streaming && !message.text ? (
+                    <span className="chat-pending" role="status">
+                      <span className="chat-pending-text">답변을 준비하고 있어요</span>
+                      <span className="chat-pending-dots" aria-hidden="true"><i /><i /><i /></span>
+                    </span>
+                  ) : <ChatMessage text={message.text} />
                 ) : (
                   message.text
                 )}
@@ -257,11 +272,7 @@ export default function Chat() {
               </span>
             </div>
           )}
-          {pending && (
-            <div className="bubble bot chat-pending" role="status">
-              답변을 작성하고 있어요…
-            </div>
-          )}
+
         </div>
         {error && (
           <p className="chat-error" role="alert">

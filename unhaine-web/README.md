@@ -77,6 +77,8 @@ npm run build:worker
 프런트엔드의 API 주소만 바꾸려면 `.env.example`을 참고해 `VITE_CHAT_API_URL`을 설정하고 다시 빌드합니다.
 `GET /health`는 키 등록 여부를 확인하는 준비 상태이며 실제 OpenAI 인증·잔액 검증을 대신하지 않습니다.
 
+챗은 `Accept: text/event-stream` 요청으로 생성 중인 답변을 실시간 표시합니다. 첫 텍스트 전에는 애니메이션 대기 문구를 표시하며, 스트림 중단 시 부분 답변과 오류를 남깁니다. 완료되지 않은 대화는 다음 요청의 이력에서 제외합니다. 기존 JSON 응답도 지원합니다.
+
 GitHub Actions는 화면과 참고 원문을 배포합니다. Worker 코드 변경 시 Worker도 별도로 빌드·배포해야 합니다.
 
 ## 블로그 추가

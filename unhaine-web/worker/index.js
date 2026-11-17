@@ -155,6 +155,38 @@ export function createHandler(fetcher = fetch) {
       const timeout = setTimeout(() => controller.abort(), 60_000);
       const abort = () => controller.abort();
       request.signal.addEventListener("abort", abort, { once: true });
+      let streaming = false;
+      const cleanup = () => {
+        clearTimeout(timeout);
+        request.signal.removeEventListener("abort", abort);
+        if (sessionId) {
+          // Conversation stays in the browser; remove the temporary remote session after each turn.
+          ctx.waitUntil(
+            fetcher(`${API}/${encodeURIComponent(sessionId)}`, {
+              method: "DELETE",
+              signal: AbortSignal.timeout(10_000),
+              headers: {
+                Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+                "OpenAI-Beta": "agents=v1",
+              },
+            })
+              .then((response) => {
+                if (!response.ok)
+                  console.error(
+                    JSON.stringify({
+                      event: "session_cleanup_failed",
+                      status: response.status,
+                    }),
+                  );
+              })
+              .catch(() =>
+                console.error(
+                  JSON.stringify({ event: "session_cleanup_failed" }),
+                ),
+              ),
+          );
+        }
+      };
       try {
         if (!env.OPENAI_API_KEY || !env.OPENAI_AGENT_ID)
           throw new HttpError(
@@ -249,10 +281,50 @@ export function createHandler(fetcher = fetch) {
             );
           throw new Error("Upstream unavailable");
         }
-        const text = await readAgentAnswer(upstream.body, (id) => {
-          sessionId = id;
-        });
-        return json({ text });
+        const onSession = (id) => { sessionId = id; };
+        if (!request.headers.get("Accept")?.includes("text/event-stream")) {
+          const text = await readAgentAnswer(upstream.body, onSession, undefined, controller.signal);
+          return json({ text });
+        }
+        let outputController;
+        const stream = new TransformStream({ start(value) { outputController = value; } });
+        const writer = stream.writable.getWriter();
+        const encoder = new TextEncoder();
+        const emit = (event) => writer.write(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
+        // A cancelled response must stop upstream generation too.
+        writer.closed.catch(abort);
+        const abortWriter = () => outputController.error(new DOMException("Aborted", "AbortError"));
+        controller.signal.addEventListener("abort", abortWriter, { once: true });
+        if (controller.signal.aborted) abortWriter();
+        streaming = true;
+        ctx.waitUntil((async () => {
+          try {
+            await emit({ type: "ready" });
+            let sentText = "";
+            await readAgentAnswer(upstream.body, onSession, async text => {
+              const event = text.startsWith(sentText)
+                ? { type: "delta", delta: text.slice(sentText.length) }
+                : { type: "text", text };
+              sentText = text;
+              if (event.type === "text" || event.delta) await emit(event);
+            }, controller.signal);
+            await emit({ type: "done" });
+            await writer.close();
+          } catch {
+            console.error(JSON.stringify({ event: "chat_stream_failed" }));
+            await emit({ type: "error", error: "답변 생성이 중단되었습니다. 다시 시도해 주세요." }).catch(() => {});
+            await writer.close().catch(() => {});
+          } finally {
+            controller.signal.removeEventListener("abort", abortWriter);
+            cleanup();
+          }
+        })());
+        return new Response(stream.readable, { headers: {
+          ...headers,
+          "Content-Type": "text/event-stream; charset=utf-8",
+          "Cache-Control": "no-store, no-transform",
+          "X-Accel-Buffering": "no",
+        } });
       } catch (error) {
         const status =
           error instanceof HttpError
@@ -276,35 +348,7 @@ export function createHandler(fetcher = fetch) {
           status,
         );
       } finally {
-        clearTimeout(timeout);
-        request.signal.removeEventListener("abort", abort);
-        if (sessionId) {
-          // Conversation stays in the browser; remove the temporary remote session after each turn.
-          ctx.waitUntil(
-            fetcher(`${API}/${encodeURIComponent(sessionId)}`, {
-              method: "DELETE",
-              signal: AbortSignal.timeout(10_000),
-              headers: {
-                Authorization: `Bearer ${env.OPENAI_API_KEY}`,
-                "OpenAI-Beta": "agents=v1",
-              },
-            })
-              .then((response) => {
-                if (!response.ok)
-                  console.error(
-                    JSON.stringify({
-                      event: "session_cleanup_failed",
-                      status: response.status,
-                    }),
-                  );
-              })
-              .catch(() =>
-                console.error(
-                  JSON.stringify({ event: "session_cleanup_failed" }),
-                ),
-              ),
-          );
-        }
+        if (!streaming) cleanup();
       }
     },
   };
