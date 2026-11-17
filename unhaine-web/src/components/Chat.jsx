@@ -5,6 +5,7 @@ import ChatMessage from "./ChatMessage";
 const CHAT_API_URL =
   import.meta.env.VITE_CHAT_API_URL ||
   "https://unhaine-chat-api.ultrasaram.workers.dev/chat";
+const CHAT_HEALTH_URL = new URL("health", CHAT_API_URL).href;
 
 function Symbol({ size = 22 }) {
   return (
@@ -31,6 +32,8 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const [connection, setConnection] = useState("disconnected");
+  const cancelConnectionCheck = useRef(null);
   const { pathname } = useLocation();
   const sending = useRef(false);
   const requestController = useRef(null);
@@ -38,6 +41,39 @@ export default function Chat() {
   const launch = useRef(null);
   const textarea = useRef(null);
   const body = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    let active = true;
+    const controller = new AbortController();
+    setConnection("checking");
+    const timeout = setTimeout(() => {
+      if (active) setConnection("disconnected");
+      controller.abort();
+    }, 8000);
+    const cancel = () => {
+      active = false;
+      clearTimeout(timeout);
+      controller.abort();
+    };
+    cancelConnectionCheck.current = cancel;
+    fetch(CHAT_HEALTH_URL, { signal: controller.signal, cache: "no-store" })
+      .then(async (response) => {
+        const health = response.ok ? await response.json() : null;
+        if (active)
+          setConnection(health?.ready === true ? "connected" : "disconnected");
+      })
+      .catch(() => {
+        if (active && !controller.signal.aborted) setConnection("disconnected");
+      })
+      .finally(() => clearTimeout(timeout));
+    const offline = () => setConnection("disconnected");
+    window.addEventListener("offline", offline);
+    return () => {
+      cancel();
+      window.removeEventListener("offline", offline);
+    };
+  }, [open]);
 
   useEffect(() => {
     mounted.current = true;
@@ -76,6 +112,7 @@ export default function Chat() {
     event.preventDefault();
     const question = input.trim();
     if (!question || sending.current) return;
+    cancelConnectionCheck.current?.();
     sending.current = true;
     setPending(true);
     setError("");
@@ -106,12 +143,14 @@ export default function Chat() {
         );
       if (typeof result.text !== "string" || !result.text.trim())
         throw new Error("답변을 가져오지 못했습니다. 다시 시도해 주세요.");
+      setConnection("connected");
       setMessages((previous) => [
         ...previous,
         { kind: "bot", text: result.text },
       ]);
     } catch (failure) {
       if (!mounted.current) return;
+      setConnection("disconnected");
       setMessages((previous) => previous.slice(0, -1));
       setInput(question);
       setError(
@@ -128,6 +167,13 @@ export default function Chat() {
       requestController.current = null;
     }
   }
+
+  const connectionLabel =
+    connection === "connected"
+      ? "AI 연결됨"
+      : connection === "checking"
+        ? "AI 연결 확인 중"
+        : "AI 연결 확인 필요";
 
   return (
     <>
@@ -149,7 +195,15 @@ export default function Chat() {
         inert={!open}
       >
         <div className="chat-head">
-          <Symbol />
+          <span
+            className="chat-connection"
+            data-connected={connection === "connected"}
+            role="status"
+            title={connectionLabel}
+          >
+            <Symbol />
+            <span className="sr-only">{connectionLabel}</span>
+          </span>
           <button
             className="chat-close"
             aria-label="챗 닫기"

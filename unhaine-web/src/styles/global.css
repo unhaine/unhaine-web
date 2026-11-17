@@ -1314,6 +1314,8 @@ input:focus-visible {
   background: none;
   padding: 0;
   color: var(--muted);
+  align-self: stretch;
+  max-width: 100%;
 }
 .bubble.user {
   background: var(--surface);
@@ -1476,6 +1478,14 @@ input:focus-visible {
  * 입력창 여백은 Main과 상세 페이지에 동일하게 적용합니다. */
 .chat-head {
   padding-inline: 16px 8px;
+}
+.chat-head .chat-connection {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg);
+}
+.chat-head .chat-connection[data-connected="true"] {
+  color: var(--accent);
 }
 .chat-body {
   padding: 16px;
