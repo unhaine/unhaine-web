@@ -189,6 +189,15 @@ export default function Chat() {
     }
   }
 
+  function followAnswerLink(event) {
+    // Keep the desktop conversation visible; reveal the destination under the mobile overlay.
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (window.matchMedia("(max-width: 780px)").matches) {
+      setOpen(false);
+      document.querySelector("main")?.focus({ preventScroll: true });
+    }
+  }
+
   const connectionLabel =
     connection === "connected"
       ? "AI 연결됨"
@@ -287,7 +296,7 @@ export default function Chat() {
                       <span className="chat-pending-text">답변을 준비하고 있어요</span>
                       <span className="chat-pending-dots" aria-hidden="true"><i /><i /><i /></span>
                     </span>
-                  ) : <ChatMessage text={message.text} />
+                  ) : <ChatMessage text={message.text} onNavigate={followAnswerLink} />
                 ) : (
                   message.text
                 )}
