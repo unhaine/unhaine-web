@@ -3528,3 +3528,55 @@ input:focus-visible {
   .article-media-row { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .article-image-frame { flex: none; height: 320px; }
 }
+
+.about-intro { max-width: 670px; margin-top: 24px; word-break: keep-all; overflow-wrap: break-word; }
+.about-intro p { margin: 0; }
+.about-intro .about-greeting { color: var(--fg); font-size: clamp(22px, 2.2vw, 28px); font-weight: 600; line-height: 1.5; letter-spacing: -.035em; }
+.about-intro .about-personality { margin-top: 12px; color: var(--fg); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; letter-spacing: -.025em; }
+.about-personality strong { color: var(--accent); font-weight: 600; }
+.about-intro .about-description { max-width: 590px; margin-top: 24px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+@media (max-width: 780px) {
+  .about-intro { margin-top: 20px; }
+  .about-intro .about-description { margin-top: 20px; }
+}
+
+.chat-invite {
+  --chat-invite-bg: #20384c;
+  --chat-invite-border: #365870;
+  position: fixed;
+  right: 88px;
+  bottom: 31px;
+  z-index: 20;
+  padding: 10px 14px;
+  max-width: calc(100vw - 110px);
+  color: var(--fg);
+  background: var(--chat-invite-bg);
+  border: 1px solid var(--chat-invite-border);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px #0004;
+  font-size: 13px;
+  line-height: 1.5;
+  pointer-events: none;
+  animation: chat-invite-in 220ms ease-out both;
+}
+.chat-invite::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: calc(50% - 5px);
+  width: 8px;
+  height: 8px;
+  background: var(--chat-invite-bg);
+  border-top: 1px solid var(--chat-invite-border);
+  border-right: 1px solid var(--chat-invite-border);
+  transform: rotate(45deg);
+}
+@keyframes chat-invite-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 780px) { .chat-invite { right: 78px; bottom: 21px; } }
+@media (prefers-reduced-motion: reduce) {
+  .chat-invite { animation: none; }
+}
+
+.chat-head-actions { display: flex; align-items: center; gap: 4px; }
+.chat-reset:disabled { opacity: .35; cursor: default; }
+.chat-reset:disabled:hover { color: var(--muted); background: none; }

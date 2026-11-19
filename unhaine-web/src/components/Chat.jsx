@@ -5,12 +5,17 @@ import { readChatStream } from "../lib/chat-stream";
 
 const CHAT_API_URL =
   import.meta.env.VITE_CHAT_API_URL ||
-  "https://unhaine-chat-api.ultrasaram.workers.dev/chat";
-const CHAT_HEALTH_URL = new URL("health", CHAT_API_URL).href;
+  (import.meta.env.DEV
+    ? "/chat-api/chat"
+    : "https://unhaine-chat-api.ultrasaram.workers.dev/chat");
+const CHAT_HEALTH_URL = CHAT_API_URL.startsWith("/")
+  ? "/chat-api/health"
+  : new URL("health", CHAT_API_URL).href;
 
-function Symbol({ size = 22 }) {
+function Symbol({ size = 22, className }) {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -34,6 +39,7 @@ export default function Chat() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
   const [connection, setConnection] = useState("disconnected");
+  const [hintVisible, setHintVisible] = useState(true);
   const cancelConnectionCheck = useRef(null);
   const { pathname } = useLocation();
   const sending = useRef(false);
@@ -44,7 +50,6 @@ export default function Chat() {
   const body = useRef(null);
 
   useEffect(() => {
-    if (!open) return;
     let active = true;
     const controller = new AbortController();
     setConnection("checking");
@@ -75,6 +80,12 @@ export default function Chat() {
       window.removeEventListener("offline", offline);
     };
   }, [open]);
+
+  useEffect(() => {
+    if (!hintVisible || connection !== "connected" || open) return;
+    const timeout = setTimeout(() => setHintVisible(false), 7000);
+    return () => clearTimeout(timeout);
+  }, [hintVisible, connection, open]);
 
   useEffect(() => {
     mounted.current = true;
@@ -184,6 +195,7 @@ export default function Chat() {
       : connection === "checking"
         ? "AI 연결 확인 중"
         : "AI 연결 확인 필요";
+  const showHint = hintVisible && connection === "connected" && !open;
 
   return (
     <>
@@ -194,10 +206,21 @@ export default function Chat() {
         aria-label="챗 열기"
         aria-expanded={open}
         aria-controls="chat-panel"
-        onClick={() => setOpen(!open)}
+        aria-describedby={showHint ? "chat-invite" : undefined}
+        data-connected={connection === "connected"}
+        title={`챗 열기 · ${connectionLabel}`}
+        onClick={() => {
+          setHintVisible(false);
+          setOpen(!open);
+        }}
       >
         <Symbol size={20} />
       </button>
+      {showHint && (
+        <div className="chat-invite" id="chat-invite" role="status">
+          궁금한 점을 물어보세요
+        </div>
+      )}
       <section
         className={`chat-panel${open ? " open" : ""}`}
         id="chat-panel"
@@ -214,16 +237,37 @@ export default function Chat() {
             <Symbol />
             <span className="sr-only">{connectionLabel}</span>
           </span>
-          <button
-            className="chat-close"
-            aria-label="챗 닫기"
-            onClick={() => {
-              setOpen(false);
-              launch.current.focus();
-            }}
-          >
-            ×
-          </button>
+          <div className="chat-head-actions">
+            <button
+              type="button"
+              className="chat-close chat-reset"
+              aria-label="새 대화 시작"
+              title="새 대화 시작"
+              disabled={pending}
+              onClick={() => {
+                if (sending.current) return;
+                setMessages([]);
+                setInput("");
+                setError("");
+                textarea.current.focus();
+              }}
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M20 7v5h-5" />
+                <path d="M20 12a8 8 0 1 0-2.3 5.7" />
+              </svg>
+            </button>
+            <button
+              className="chat-close"
+              aria-label="챗 닫기"
+              onClick={() => {
+                setOpen(false);
+                launch.current.focus();
+              }}
+            >
+              ×
+            </button>
+          </div>
         </div>
         <div
           ref={body}
@@ -251,21 +295,7 @@ export default function Chat() {
             ))
           ) : (
             <div className="chat-placeholder">
-              <svg
-                className="chat-placeholder-icon"
-                width="64"
-                height="64"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="5" width="18" height="10" rx="1" />
-                <path d="m3 9 4-4m0 10L17 5m0 10 4-4M6 15v6m12-6v6" />
-              </svg>
+              <Symbol size={48} className="chat-placeholder-icon" />
               <p>무엇이 궁금하신가요?</p>
               <span className="chat-intro">
                 경력, 프로젝트, 일하는 방식에 대해 물어보세요.

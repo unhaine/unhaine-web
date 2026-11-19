@@ -12,11 +12,18 @@ export default function About() {
           <br />
           <em>to AI engineering.</em>
         </h1>
-        <p className="lead">
-          비즈니스에서 출발해 기술로 확장해 온 경험과,
-          <br className="intro-break" />그 과정에서 쌓은 역량과 일하는 방식을
-          소개합니다.
-        </p>
+        <div className="about-intro">
+          <p className="about-greeting">안녕하세요, 허윤행입니다.</p>
+          <p className="about-personality">
+            새로운 도전을 즐기고,
+            <br />
+            <strong>떠오른 생각을 직접 실현해 보는 것</strong>을 좋아합니다.
+          </p>
+          <p className="about-description">
+            이곳에는 비즈니스 현장에서 시작해 기술의 영역으로 넓혀온 저의 경험과,
+            그 과정에서 쌓아온 역량과 일하는 방식을 담았습니다.
+          </p>
+        </div>
       </div>
       <div className="tile-grid">
         <Link className="info-tile" to={"/about/career"}>
