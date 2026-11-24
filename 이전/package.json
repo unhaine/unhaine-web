@@ -1,1 +1,0 @@
-{"name":"unhaine-web","private":true,"type":"module","scripts":{"build":"node build.mjs"},"devDependencies":{"esbuild":"^0.28.2","html-minifier-terser":"^7.2.0","marked":"^18.2.0"}}
