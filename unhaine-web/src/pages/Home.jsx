@@ -55,6 +55,15 @@ export default function Home() {
             <span>↗</span>
           </Link>
         </div>
+        <div className="home-illustration" aria-hidden="true">
+          <img
+            src="assets/home/robot-lamplighter.png"
+            alt=""
+            width="1024"
+            height="1536"
+            decoding="async"
+          />
+        </div>
       </section>
     </>
   );

@@ -3580,3 +3580,38 @@ input:focus-visible {
 .chat-head-actions { display: flex; align-items: center; gap: 4px; }
 .chat-reset:disabled { opacity: .35; cursor: default; }
 .chat-reset:disabled:hover { color: var(--muted); background: none; }
+
+/* Main illustration shares the introduction's height without covering the copy. */
+.home-page .hero {
+  grid-template-columns: minmax(0, 1.65fr) minmax(240px, 1fr);
+  column-gap: clamp(24px, 4cqi, 64px);
+}
+.home-page .hero > .home-intro,
+.home-page .hero > .home-welcome,
+.home-page .hero > .actions { grid-column: 1; }
+.home-illustration {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: stretch;
+  position: relative;
+  min-width: 0;
+  pointer-events: none;
+}
+.home-illustration img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+@container (max-width: 850px) {
+  .home-page .hero { grid-template-columns: minmax(0, 1fr); }
+  .home-illustration {
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: center;
+    width: min(100%, 280px);
+    height: 360px;
+  }
+}
