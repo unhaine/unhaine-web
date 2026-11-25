@@ -16,12 +16,12 @@ export default function Home() {
             <br />
             <em>Building the solution.</em>
           </h1>
-          <p className="lead">
-            비즈니스의 문제를 기술로 풀어내는,
-            <br className="intro-break" />
-            직접 설계하고 구현하는 사람을 지향합니다.
-          </p>
         </div>
+        <p className="lead home-summary">
+          비즈니스의 문제를 기술로 풀어내는,
+          <br className="intro-break" />
+          직접 설계하고 구현하는 사람을 지향합니다.
+        </p>
         <div className="home-welcome">
           <p>
             저는 익숙한 일에 머무르기보다 새로운 문제에 도전하는 사람이고

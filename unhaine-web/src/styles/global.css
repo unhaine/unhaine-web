@@ -3581,17 +3581,23 @@ input:focus-visible {
 .chat-reset:disabled { opacity: .35; cursor: default; }
 .chat-reset:disabled:hover { color: var(--muted); background: none; }
 
-/* Main illustration shares the introduction's height without covering the copy. */
+/* Desktop pairs the illustration with the copy; phones give it a dedicated hero row. */
 .home-page .hero {
   grid-template-columns: minmax(0, 1.65fr) minmax(240px, 1fr);
+  grid-template-areas:
+    "intro art"
+    "summary art"
+    "welcome art"
+    "actions art";
   column-gap: clamp(24px, 4cqi, 64px);
 }
-.home-page .hero > .home-intro,
-.home-page .hero > .home-welcome,
-.home-page .hero > .actions { grid-column: 1; }
+.home-page .home-intro { grid-area: intro; }
+.home-page .home-intro h1 { margin-bottom: 0; }
+.home-page .home-summary { grid-area: summary; word-break: keep-all; }
+.home-page .home-welcome { grid-area: welcome; }
+.home-page .hero > .actions { grid-area: actions; }
 .home-illustration {
-  grid-column: 2;
-  grid-row: 1 / 4;
+  grid-area: art;
   align-self: stretch;
   position: relative;
   min-width: 0;
@@ -3605,13 +3611,32 @@ input:focus-visible {
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
-@container (max-width: 850px) {
-  .home-page .hero { grid-template-columns: minmax(0, 1fr); }
-  .home-illustration {
-    grid-column: 1;
-    grid-row: 4;
-    justify-self: center;
-    width: min(100%, 280px);
-    height: 360px;
+@container (max-width: 1000px) {
+  .home-page .hero {
+    grid-template-columns: minmax(0, 1.45fr) minmax(170px, 1fr);
+    grid-template-areas:
+      "intro intro"
+      "summary art"
+      "welcome art"
+      "actions art";
+    column-gap: clamp(20px, 3cqi, 32px);
   }
+}
+@container (max-width: 480px) {
+  .home-page .hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "art"
+      "summary"
+      "welcome"
+      "actions";
+    row-gap: 20px;
+  }
+  .home-illustration {
+    justify-self: center;
+    width: min(100%, 240px);
+    height: clamp(210px, 65cqi, 280px);
+  }
+  .home-page .home-summary { max-width: 28em; }
 }
